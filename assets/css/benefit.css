@@ -1,0 +1,35 @@
+#benefit {
+    background-color: #F9F9FB;
+    /* height: 100vh; */
+    width: 100%;
+}
+
+.fw-bold {
+    margin-top: 30px;
+    font-size: 45px;
+    margin-bottom: 20px;
+}
+
+.container {
+    margin-top: 20px;
+}
+
+.container-icon {
+    text-align: center;
+    background-color: #2C2F75;
+    width: 76px;
+    height: 76px;
+    border-radius: 20px;
+}
+
+.img-benefit {
+    margin-top: 15px;
+    margin-right: 150px;
+    margin-left: 20px;
+    height: 85vh;
+}
+@media (max-width: 992px) {
+    .img-benefit {
+      display: none;
+    }
+  }

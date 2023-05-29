@@ -1,0 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+:root {
+	--first-color: #2c2f75;
+	--first-color-light: #afa5d9;
+	--white-color: #f9f9fb;
+	--body-font: "Nunito", sans-serif;
+}
+
+body {
+	font-family: var(--body-font);
+}
+
+nav {
+	/* height: 60px; */
+	color: #f9f9fb;
+}
+
+.nav-link.active {
+	font-weight: bold;
+	color: #2c2f75;
+}
+/* 
+.navbar {
+	display: flex;
+	z-index: 3;
+} */
+
+.navbar a {
+	color: #1a181d;
+	font-size: 16px;
+	font-weight: 500;
+	padding: 5px 0;
+	transition: all 0.5s ease;
+}
+
+.navbar a:hover {
+	color: #2c2f75;
+}
+
+.navbar a.active {
+	color: #2c2f75;
+	font-weight: bold;
+	border-bottom-color: #2c2f75;
+}
+
+.navbar-toggler {
+	height: 50px;
+}
+
+@media (min-width: 992px) {
+	.navbar-toggler {
+		display: none;
+	}
+}
+
+.button-primary {
+	width: 120px;
+	background-color: #2c2f75;
+	color: white;
+	border: none;
+	border-radius: 10px;
+	padding: 15px 20px;
+	font-weight: bold;
+}
+
+@media (max-width: 992px) {
+	.button-primary {
+		display: none;
+	}
+}
+
+.login-text {
+	width: 120px;
+}
+
+.button-secondary {
+	width: 120px;
+	background-color: #f9f9fb;
+	color: #1a181d;
+	border: 2px solid#1A181D;
+	border-radius: 10px;
+	padding: 15px;
+	margin: 10px 10px;
+	font-weight: bold;
+}
+
+@media (max-width: 992px) {
+	.button-secondary {
+		display: none;
+	}
+}
