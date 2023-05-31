@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/cropperjs@1.5.12/dist/cropper.min.js"></script>
+
 <body id="body-pd">
     <!--=============== Cover ===============-->
     <div class="cover">
@@ -13,21 +15,22 @@
             </div>
         </div>
     </div>
+
     <section class="information__section">
         <div class="all__information mb-5 pb-5">
             <div class="row justify-content-center p-2 gap-xl-3 flex-xl-row-reverse flex-md-row-reverse">
                 <!-- Summary Information -->
-                <div class="col-lg-4 col-md-4" data-aos="fade-up" data-aos-duration="1000">
+                <div class="col-lg-4 col-md-4 mb-3" data-aos="fade-up" data-aos-duration="1000">
                     <div class="d-flex flex-column gap-3">
                         <div class="summary__information">
                             <div class="info-card">
                                 <!-- Profile Information -->
-                                <div id="close__form__profile" class="info-card-content border">
+                                <div id="close__form__profile" class="info-card-content">
                                     <div class="d-flex justify-content-center p-4">
                                         <?php if (empty($member)) : ?>
                                             <img class="w-100 px-5 rounded-circle" src="<?= base_url('assets/images/profile/12_52923_images.png') ?>" alt="">
                                         <?php else : ?>
-                                            <img class="w-100 px-5 rounded-circle" src="<?= base_url('assets/images/profile/' . $member->image) ?>" alt="">
+                                            <img class="w-100 px-5 rounded-circle" src="<?= base_url('assets/images/profile/cropped/' . $member->image) ?>" alt="">
                                         <?php endif ?>
                                     </div>
                                     <div class="name-profile">
@@ -52,7 +55,7 @@
                                         <?php if (empty($member)) : ?>
                                             <p class="text-lg">Deskripsi Pengguna : -</p>
                                         <?php else : ?>
-                                            <p class="text-lg"><?= $member->summary ?>-</p>
+                                            <p class="text-lg"><?= $member->summary ?></p>
                                         <?php endif ?>
 
                                     </div>
@@ -105,13 +108,27 @@
                                             </div>
                                         </form>
                                     <?php else : ?>
+                                        <!-- style -->
+                                        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.15/css/jquery.Jcrop.min.css" />
+                                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-jcrop/0.9.15/js/jquery.Jcrop.min.js"></script>
                                         <form action="<?= base_url('userBranch/user/update_profile/' . $id_user) ?>" method="post" enctype="multipart/form-data">
                                             <div class="mb-2 p-2 px-4">
                                                 <input type="number" name="id_user" class="form-control" value="<?= $id_user ?>" hidden>
                                             </div>
+
                                             <div class="mb-2 p-2 px-4">
                                                 <label for="image" class="form-label">Foto : <a target="_blank" href="<?= base_url('assets/images/profile/' . $member->image) ?>">Lihat File Foto</a> </label>
-                                                <input type="file" name="image" value="<?= $member->image ?>" class="form-control">
+
+                                                <input class="form-control" type="file" name="image" accept="image/*">
+                                                <div class="py-3" id="preview-container">
+                                                    <?php if (!empty($member->image)) : ?>
+                                                        <img src="<?= base_url('assets/images/profile/cropped/' . $member->image) ?>" id="preview-image" alt="Preview Image" />
+                                                    <?php endif; ?>
+                                                </div>
+                                                <input type="hidden" name="x" id="x">
+                                                <input type="hidden" name="y" id="y">
+                                                <input type="hidden" name="w" id="w">
+                                                <input type="hidden" name="h" id="h">
                                             </div>
                                             <div class="mb-2 p-2 px-4">
                                                 <label for="disabledTextInput" class="form-label">Nama Lengkap</label>
@@ -152,12 +169,105 @@
                             </div>
                         </div>
                     </div>
+                    <!-- script -->
+                    <script>
+                        $(document).ready(function() {
+                            var aspectRatio = 1; // Rasio pemotongan default
+                            var cropWidth = 200; // Lebar pemotongan default
+                            var cropHeight = 200; // Tinggi pemotongan default
+
+
+                            $('#image').on('change', function() {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    resizeImage(e.target.result, 180, 180, function(resizedImage) {
+                                        $('#preview-container').html('<img src="' + resizedImage + '" id="preview-image" alt="Preview Image" />');
+                                        initJCrop();
+                                    });
+                                };
+                                reader.readAsDataURL(this.files[0]);
+                            });
+
+
+                            // Fungsi untuk menginisialisasi JCrop
+                            function initJCrop() {
+                                $('#preview-image').Jcrop({
+                                    aspectRatio: aspectRatio,
+                                    setSelect: [0, 0, cropWidth, cropHeight],
+                                    onSelect: updateCoords
+                                });
+                            }
+
+                            // Fungsi untuk memperbarui koordinat pemotongan
+                            function updateCoords(c) {
+                                $('#x').val(c.x);
+                                $('#y').val(c.y);
+                                $('#w').val(c.w);
+                                $('#h').val(c.h);
+                            }
+
+                            function resizeImage(src, maxWidth, maxHeight, callback) {
+                                var image = new Image();
+                                image.src = src;
+                                image.onload = function() {
+                                    var width = image.width;
+                                    var height = image.height;
+
+                                    if (width > height) {
+                                        if (width > maxWidth) {
+                                            height *= maxWidth / width;
+                                            width = maxWidth;
+                                        }
+                                    } else {
+                                        if (height > maxHeight) {
+                                            width *= maxHeight / height;
+                                            height = maxHeight;
+                                        }
+                                    }
+
+                                    var canvas = document.createElement('canvas');
+                                    var ctx = canvas.getContext('2d');
+                                    canvas.width = width;
+                                    canvas.height = height;
+                                    ctx.drawImage(image, 0, 0, width, height);
+
+                                    var resizedImage = canvas.toDataURL('image/jpeg', 1);
+                                    callback(resizedImage);
+                                };
+                            }
+
+                            $('input[type="file"]').on('change', function() {
+                                var reader = new FileReader();
+                                reader.onload = function(e) {
+                                    $('#preview-container').html('<img src="' + e.target.result + '" id="preview-image" alt="Preview Image" />');
+                                    initJCrop();
+                                };
+                                reader.readAsDataURL(this.files[0]);
+                            });
+
+                            // Fungsi untuk mengubah rasio dan ukuran pemotongan
+                            $('#change-ratio').on('change', function() {
+                                aspectRatio = parseFloat($(this).val());
+                                initJCrop();
+                            });
+
+                            $('#change-width').on('change', function() {
+                                cropWidth = parseInt($(this).val());
+                                initJCrop();
+                            });
+
+                            $('#change-height').on('change', function() {
+                                cropHeight = parseInt($(this).val());
+                                initJCrop();
+                            });
+                        });
+                    </script>
 
 
                 </div>
 
                 <!-- Personal Information -->
-                <div class="col-lg-7 col-md-7" data-aos="fade-up" data-aos-duration="1000">
+                <div class="col-lg-7 col-md-7 mb-3" data-aos="fade-up" data-aos-duration="1000">
                     <div class="d-flex flex-column gap-3">
                         <div class="personal__information">
                             <div class="info-card">

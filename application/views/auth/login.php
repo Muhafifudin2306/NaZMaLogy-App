@@ -1,24 +1,20 @@
 <body>
     <?php
     if ($this->session->flashdata('end_session') != '') {
-        echo "
-        <script>
-        Swal.fire({
-            toast: true,
-            position: 'top-right',
-            iconColor: 'white',
-            customClass: {
-                popup: 'colored-toast'
-            },
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: 'error',
-            title: 'Sesi Telah Berakhir',
-        })
-        </script>
-        ";
+        $message = $this->session->flashdata('end_session');
+        $icon = 'error';
     } else if ($this->session->flashdata('error_login') != '') {
+        $message = $this->session->flashdata('error_login');
+        $icon = 'error';
+    } else if ($this->session->flashdata('success_register') != '') {
+        $message = $this->session->flashdata('success_register');
+        $icon = 'success';
+    } else if ($this->session->flashdata('warning_register') != '') {
+        $message = $this->session->flashdata('warning_register');
+        $icon = 'warning';
+    }
+
+    if (isset($message)) {
         echo "
         <script>
         Swal.fire({
@@ -31,50 +27,14 @@
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            icon: 'error',
-            title: 'Email atau Password Salah',
+            icon: '$icon',
+            title: '$message'
         })
-        </script>
-        ";
-    } else if ($this->session->flashdata('success_register') != '') {
-        echo "
-        <script>
-        Swal.fire({
-            toast: true,
-            position: 'top-right',
-            iconColor: 'white',
-            customClass: {
-                popup: 'colored-toast',
-            },
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: 'success',
-            title: 'Register Sukses',
-        })    
-        </script>
-        ";
-    }
-    else if ($this->session->flashdata('warning_register') != '') {
-        echo "
-        <script>
-        Swal.fire({
-            toast: true,
-            position: 'top-right',
-            iconColor: 'white',
-            customClass: {
-                popup: 'colored-toast',
-            },
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            icon: 'warning',
-            title: 'E-mail Sudah Terdaftar',
-        })    
         </script>
         ";
     }
     ?>
+
 
     <div class="d-flex responsive-form">
         <div class="side-left w-50 m-full">
@@ -82,10 +42,10 @@
             <div class="login_field">
                 <div class="auth-form">
                     <h2 class="text-center py-4 ft-7">Masuk Akun</h2>
-                    <form method="post" action="<?php echo base_url('auth/proses'); ?>">
+                    <form onsubmit="return validateForm()" method="post" action="<?php echo base_url('auth/login_proccess'); ?>">
                         <div class="login__field">
                             <i class="bx bx-envelope login__icon"></i>
-                            <input type="text" class="login__input" placeholder="example@example.com" name="email" id="email" required>
+                            <input type="email" class="login__input" placeholder="example@example.com" name="email" id="email" required>
                         </div>
                         <div class="login__field">
                             <i class="bx bx-lock login__icon"></i>
@@ -109,13 +69,6 @@
                             </button>
                         </a>
                     </div>
-                    <!-- <div class="p-2">
-                        <button onclick="errorLogin()" class="btn
-                                btn-primary bg-first w-100 ft-7">
-                            <span> Masuk
-                                Sekarang</span>
-                        </button>
-                    </div> -->
                     <p class=" text-center pt-2">Belum punya akun? <a class="text-first hv-text" href="<?= site_url('auth/register_page') ?>">
                             Daftar sekarang</a> </p>
                 </div>
@@ -130,7 +83,27 @@
             <div class="logo-panel">
                 <img src="<?= base_url('assets/img/logo-white-blank.png') ?>" alt="">
             </div>
-
         </div>
     </div>
+
+    <!-- Client Validation JS -->
+    <script>
+        function validateForm() {
+            var email = document.getElementById("email").value;
+
+            // Validasi format email menggunakan ekspresi reguler
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '<span class="text-black">' + 'Kesalahan' + '</span>',
+                    text: 'Kolom email harus berisi alamat email yang valid.'
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <!-- Client Validation JS -->
 </body>

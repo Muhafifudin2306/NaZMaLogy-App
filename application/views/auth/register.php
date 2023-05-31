@@ -1,42 +1,46 @@
 <body>
     <?php
     if ($this->session->flashdata('error') != '') {
-        echo "
-      <script>
-      Swal.fire({
+        $errorMessage = $this->session->flashdata('error');
+        echo '
+        <script>
+        Swal.fire({
             toast: true,
-            position: 'top-right',
-            iconColor: 'white',
+            position: "top-right",
+            iconColor: "white",
             customClass: {
-                popup: 'colored-toast'
+                popup: "colored-toast"
             },
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            icon: 'error',
-            title: 'Email Telah Terdaftar!',
-        })
-      </script>
-      ";
+            icon: "error",
+            title: "' . $errorMessage . '"
+        });
+        </script>
+        ';
     }
     ?>
+
     <div class="d-flex responsive-form pb-5 pb-md-0">
         <div class="side-left w-50 m-full">
-
             <div class="login_field">
                 <div class="auth-form">
                     <h2 class="text-center py-3 ft-7">Daftar Akun</h2>
-                    <form method="post" action="<?php echo base_url('auth/register_proccess'); ?>">
+                    <!-- Register Form -->
+                    <form onsubmit="return validateForm()" method="post" action="<?php echo base_url('auth/register_proccess'); ?>">
+                        <!-- Default to Member Role || Role : 3 -> Member -->
                         <div class="login__field" hidden>
                             <input type="text" class="login__input" name="id_role" id="id_role" value="3">
                         </div>
+                        <!-- Default to Member Role || Role : 3 -> Member -->
                         <div class="login__field">
                             <i class="bx bx-user login__icon"></i>
                             <input type="text" class="login__input" placeholder="Nama Lengkap" name="name" id="name" required>
                         </div>
                         <div class="login__field">
                             <i class="bx bx-envelope login__icon"></i>
-                            <input type="email" class="login__input" placeholder="example@example.com" name="email" required>
+                            <input id="emailInput" type="email" class="login__input" placeholder="example@example.com" name="email" required>
                         </div>
                         <div class="login__field">
                             <i class="bx bx-lock login__icon"></i>
@@ -50,17 +54,16 @@
                             <button type="submit" class="btn btn-primary bg-first w-100"> Daftar Sekarang </button>
                         </div>
                     </form>
+                    <!-- Register Form -->
                     <div class="px-2">
                         <a href="<?= site_url('/') ?>">
                             <button type="submit" class="btn d-none d-sm-inline btn-danger w-100"> Kembali
                             </button>
                         </a>
                     </div>
-
-
                     <p class="text-center pt-2 pb-5">Sudah punya akun ? <a class="text-first hv-text" href="<?= site_url('auth/login_page') ?>">
                             Masuk sekarang</a> </p>
-                            <div class="spacer py-2 d-inline d-md-none"></div>
+                    <div class="spacer py-2 d-inline d-md-none"></div>
                 </div>
 
             </div>
@@ -73,7 +76,36 @@
             <div class="logo-panel">
                 <img src="<?= base_url('assets/img/logo-white-blank.png') ?>" alt="">
             </div>
-
         </div>
     </div>
+    <!-- Client Validation JS -->
+    <script>
+        function validateForm() {
+            var password = document.getElementById("passwordInput").value;
+            var email = document.getElementById("emailInput").value;
+
+            if (password.length < 8) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '<span class="text-black">' + 'Kesalahan' + '</span>',
+                    text: 'Kolom sandi minimal harus terdiri dari 8 karakter.'
+                });
+                return false;
+            }
+
+            // Validasi format email menggunakan ekspresi reguler
+            var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email)) {
+                Swal.fire({
+                    icon: 'error',
+                    title: '<span class="text-black">' + 'Kesalahan' + '</span>',
+                    text: 'Kolom email harus berisi alamat email yang valid.'
+                });
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+    <!-- Client Validation JS -->
 </body>

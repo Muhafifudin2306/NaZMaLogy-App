@@ -60,7 +60,7 @@
                         <div class="link-footer mb-2">
                             <a class="text-white text-decoration-none" href="tel:+6287834671064">
                                 <i class="bi bi-telephone-fill"></i>
-                                <span class="text-lg">
+                                <span class="mx-2 text-lg">
                                     +62 878-3467-1064
                                 </span>
                             </a>
@@ -68,8 +68,16 @@
                         <div class="link-footer mb-2">
                             <a class="text-white text-decoration-none" href="https://wa.link/6u8kcx">
                                 <i class="bi bi-whatsapp"></i>
-                                <span class="text-lg">
+                                <span class="mx-2 text-lg">
                                     +62 878-3467-1064
+                                </span>
+                            </a>
+                        </div>
+                        <div class="link-footer mb-2">
+                            <a class="text-white text-decoration-none" href="https://goo.gl/maps/8mFH5nMM8E935s6NA">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span class="mx-2 text-lg">
+                                    NaZMa Office
                                 </span>
                             </a>
                         </div>

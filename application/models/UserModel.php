@@ -263,51 +263,84 @@ class UserModel extends CI_Model
         $instagram = $data['instagram'];
         $linkedin = $data['linkedin'];
         $email = $data['email'];
-        $address = $data['address'];
-        $district = $data['district'];
-        $region = $data['region'];
-        $province = $data['province'];
-        $posCode = $data['posCode'];
         $id = $data['id_user'];
         $this->db->where('id_user', $id);
         $profile = $this->db->get('members')->row();
         $image = $profile->image;
 
+        if ($_FILES['image']['tmp_name']) {
+            $config['upload_path'] = './assets/images/profile/';
 
-        $config['upload_path'] = './assets/images/profile/';
-        $config['allowed_types'] = '*';
-        $config['max_size'] = 10000;
+            $config['allowed_types'] = '*';
+            $config['max_size'] = 10000;
 
-        $this->load->library('upload', $config);
-        //konfigurasi upload
-        if ($this->upload->do_upload('image')) {
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('image')) {
+                $uploadedData = $this->upload->data();
+                $uploadedImage = $uploadedData['full_path'];
 
-            $data = array(
-                'name' => $name,
-                'job' => $job,
-                'summary' => $summary,
-                'linkedin' => $linkedin,
-                'instagram' => $instagram,
-                'image' => $this->upload->data('file_name')
+                // Load library image manipulation
+                $this->load->library('image_lib');
 
-            );
-            $this->db->where('id_user', $id);
-            $this->db->update('members', $data);
+                // Crop configuration
+                $cropConfig = array(
+                    'image_library' => 'gd2',
+                    'source_image' => $uploadedImage,
+                    'new_image' => './assets/images/profile/cropped/',
+                    'maintain_ratio' => FALSE,
+                    'width' => $this->input->post('w'),
+                    'height' => $this->input->post('h'),
+                    'x_axis' => $this->input->post('x'),
+                    'y_axis' => $this->input->post('y')
+                );
+
+                // Initialize crop library
+                $this->image_lib->initialize($cropConfig);
+
+                // Perform crop
+                if ($this->image_lib->crop()) {
+                    $data['image'] = $uploadedData['file_name'];
+                    $data['crop_x'] = $this->input->post('x');
+                    $data['crop_y'] = $this->input->post('y');
+                    $data['crop_width'] = $this->input->post('w');
+                    $data['crop_height'] = $this->input->post('h');
+
+                    // Delete original image
+                    $path = './assets/images/profile/' . $image;
+                    if (file_exists($path)) {
+                        unlink($path); // Menghapus gambar asli jika ada
+                    }
+                } else {
+                    // Crop failed
+                    echo $this->image_lib->display_errors();
+                }
+
+                // Clear crop library settings
+                $this->image_lib->clear();
+            } else {
+                // Upload failed
+                echo $this->upload->display_errors();
+                $data['image'] = $image;
+                $data['crop_x'] = NULL;
+                $data['crop_y'] = NULL;
+                $data['crop_width'] = NULL;
+                $data['crop_height'] = NULL;
+            }
         } else {
-            $data = array(
-                'name' => $name,
-                'job' => $job,
-                'summary' => $summary,
-                'linkedin' => $linkedin,
-                'instagram' => $instagram,
-                'email' => $email,
-                'image' => $image
-
-            );
-            $this->db->where('id_user', $id);
-            $this->db->update('members', $data);
+            $data['image'] = $image;
+            $data['crop_x'] = NULL;
+            $data['crop_y'] = NULL;
+            $data['crop_width'] = NULL;
+            $data['crop_height'] = NULL;
         }
+
+        $this->db->where('id_user', $id);
+        $this->db->update('members', $data);
     }
+
+
+
+
 
     public function updateAddress($id, $data)
     {

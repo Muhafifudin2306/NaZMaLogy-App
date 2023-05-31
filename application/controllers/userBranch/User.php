@@ -296,13 +296,14 @@ class User extends CI_Controller
             redirect('userBranch/user/setting');
       }
 
+
       public function save_profile()
       {
             //load library upload
             $this->load->library('upload');
 
             //konfigurasi upload
-            $config['upload_path'] = './assets/images/profile/';
+            $config['upload_path'] = './assets/images/profile/cropped/';
             $config['allowed_types'] = '*';
             $config['max_size'] = 10000;
 
@@ -352,6 +353,10 @@ class User extends CI_Controller
                         'posCode' => $this->input->post('posCode', TRUE),
                         'image' => $this->upload->data('file_name')
                   );
+                  // Mengubah ukuran gambar menggunakan GD atau Imagick
+                  $this->resize_image($this->upload->data('file_name'));
+
+                  // Tampilkan pesan sukses
 
 
                   if ($this->UserModel->insert_data_profile($data)) {
@@ -364,9 +369,36 @@ class User extends CI_Controller
             }
       }
 
+
+      private function resize_image($image_path)
+      {
+            // Load library GD atau Imagick
+            $this->load->library('image_lib');
+
+            // Konfigurasi resize
+            $config['image_library'] = 'gd2'; // atau 'imagick' jika menggunakan Imagick
+            $config['source_image'] = $image_path;
+            $config['maintain_ratio'] = TRUE;
+            $config['width'] = 200;
+            $config['height'] = 200;
+
+            $this->image_lib->initialize($config);
+
+            if (!$this->image_lib->resize()) {
+                  // Jika resize gagal, tampilkan pesan error
+                  echo $this->image_lib->display_errors();
+            }
+
+            // Hapus file gambar asli
+            unlink($image_path);
+      }
+
       public function update_profile($id_user)
       {
-
+            $x = $this->input->post('x');
+            $y = $this->input->post('y');
+            $width = $this->input->post('w');
+            $height = $this->input->post('h');
             $data = array(
                   'name' => $this->input->post('name', TRUE),
                   'summary' => $this->input->post('summary', TRUE),
@@ -374,15 +406,21 @@ class User extends CI_Controller
                   'email' => $this->input->post('email', TRUE),
                   'id_user' => $this->input->post('id_user', TRUE),
                   'instagram' => $this->input->post('instagram', TRUE),
-                  'linkedin' => $this->input->post('linkedin', TRUE)
+                  'linkedin' => $this->input->post('linkedin', TRUE),
+                  'crop_x' => $x,
+                  'crop_y' => $y,
+                  'crop_width' => $width,
+                  'crop_height' => $height
 
             );
+
             $this->UserModel->updateProfile($id_user, $data);
 
             $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
 
             redirect('userBranch/user/profile');
       }
+
 
       public function update_address($id_user)
       {
