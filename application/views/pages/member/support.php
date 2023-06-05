@@ -16,7 +16,7 @@
 <!-- Header -->
 
 <!-- Content -->
-<?php $this->load->view('components/member/support'); ?>
+<?php include(APPPATH . 'views/components/member/support.php'); ?>
 
 <!-- Content -->
 

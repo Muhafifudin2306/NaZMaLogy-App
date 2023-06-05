@@ -13,23 +13,13 @@ class Auth extends CI_Controller
 
       public function login_page()
       {
-            $data = [
-                  'title_page' => 'NaZMaLogy | Login Akun'
-            ];
-            $this->load->view('auth/style', $data);
-            $this->load->view('layout/front/mobile_bar');
-            $this->load->view('auth/login');
-            $this->load->view('auth/script');
+            $this->load->view('pages/auth/login');
       }
+
       public function register_page()
       {
-            $data = [
-                  'title_page' => 'NaZMaLogy | Daftar Akun'
-            ];
-            $this->load->view('auth/style', $data);
-            $this->load->view('layout/front/mobile_bar');
-            $this->load->view('auth/register');
-            $this->load->view('auth/script');
+
+            $this->load->view('pages/auth/register');
       }
 
       // Register 

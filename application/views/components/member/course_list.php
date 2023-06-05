@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.3/dist/sweetalert2.min.css">
-
 <section id="list-class" class="bg-light-primary">
     <div class="container">
         <div class="pt-3">

@@ -19,6 +19,9 @@
 
 <!-- Aos Library -->
 <link rel="stylesheet" href="<?= base_url('assets/node_modules/aos/dist/aos.css') ?>">
+<script type="text/javascript" src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
+
 
 <!-- Sweet Alert 2 Library -->
 <link rel="stylesheet" href="<?= base_url('assets/node_modules/sweetalert2/dist/sweetalert2.min.css') ?>">
+<script src="<?= base_url('assets/node_modules/sweetalert2/dist/sweetalert2.min.js') ?>"></script>
