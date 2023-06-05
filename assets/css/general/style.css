@@ -4,7 +4,7 @@
 
 :root {
     --font-1: "Nunito", sans-serif;
-    --font-2: font-family: 'Lexend Deca', sans-serif;
+    --font-2: 'Lexend Deca', sans-serif;
     --blue-1: #2c2f75;
     --blue-2: #00539E;
     --blue-3: #0099C4;
@@ -28,6 +28,7 @@ a {
     color: inherit !important;
     text-decoration: none !important;
 }
+
 
 .text-2 {
     font-family: var(--font-2) !important;
@@ -114,4 +115,22 @@ a {
 
 .fs-9 {
     font-size: var(--font-size-9) !important;
+}
+
+/* Alert */
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.swal2-title {
+    color: #fff !important;
+}
+
+.swal2-timer-progress-bar {
+    background-color: #fff !important;
+}
+
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
 }

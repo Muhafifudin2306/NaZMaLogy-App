@@ -1,5 +1,5 @@
 <!--=============== Header Phone ===============-->
-<header class="header-phone" id="header-phone">
+<header class="header-phone d-inline d-md-none" id="header-phone">
     <nav class="nav__phone container">
         <div class="nav__menu bg-white" id="nav-menu">
             <ul class="nav__list">

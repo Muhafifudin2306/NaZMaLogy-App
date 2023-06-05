@@ -26,7 +26,24 @@ class Front extends CI_Controller
       }
       public function page()
       {
-            $this->load->view('pages/member/home');
+            $data = [
+                  'testimonials' => $this->FrontModel->get_data_testimony()
+            ];
+            $this->load->view('pages/member/home', $data);
+      }
+
+      public function page_support()
+      {
+            $this->load->view('pages/member/support');
+      }
+
+      public function page_list()
+      {
+            $data = [
+                  'categories' => $this->CategoryModel->get_data_category(),
+                  'course' => $this->CourseModel->get_data_course_non_auth()
+            ];
+            $this->load->view('pages/member/course_list', $data);
       }
       public function listClass()
       {
