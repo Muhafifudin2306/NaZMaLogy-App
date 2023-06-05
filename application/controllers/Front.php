@@ -12,7 +12,7 @@ class Front extends CI_Controller
       }
       public function index()
       {
-         
+
             $data = [
                   'title_page' => 'Berinovasi Wujudkan Mimpi - NaZMaLogy',
                   'testimonials' => $this->FrontModel->get_data_testimony()
@@ -23,8 +23,10 @@ class Front extends CI_Controller
             $this->load->view('homepage');
             $this->load->view('layout/front/footer');
             $this->load->view('layout/front/script');
-            //  $this->output->set_header('Service-Worker-Allowed: /');
-            // $this->output->set_header('Content-Type: application/json');
+      }
+      public function page()
+      {
+            $this->load->view('pages/member/home');
       }
       public function listClass()
       {
