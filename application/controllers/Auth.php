@@ -87,7 +87,12 @@ class Auth extends CI_Controller
                         );
                         $this->session->set_userdata($session_data);
                         $this->session->set_flashdata('success_login', 'Login Berhasil');
-                        redirect('userBranch/user/page');
+                        $user = $this->AuthModel->getUserByUsername($email);
+                        if ($user->id_role == 1) {
+                              redirect('adminRoot/user/page');
+                        } else {
+                              redirect('userBranch/user/page');
+                        }
                   }
             }
 

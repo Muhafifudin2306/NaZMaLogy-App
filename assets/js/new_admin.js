@@ -57,31 +57,6 @@ function searchToggle(obj, evt) {
 	}
 }
 
-// Logut Function
-function logOutFunction() {
-	Swal.fire({
-		title: "<h3 class='text-dark'> " + "Apakah anda ingin logout?" + "</h3>",
-		text: "Aksi ini akan menutup sesi anda!",
-		icon: "warning",
-		showCancelButton: true,
-		confirmButtonColor: "#2c2f75",
-		cancelButtonColor: "#d33",
-		confirmButtonText: "Logout!",
-	}).then((result) => {
-		if (result.isConfirmed) {
-			Swal.fire(
-				"<h3 class='text-dark'> " + "Logout Sukses!" + "</h3>",
-				"Anda telah keluar",
-				"success"
-			).then((result) => {
-				if (result.isConfirmed) {
-					window.location.href = "https://afifudin.site/auth/logout";
-				}
-			});
-		}
-	});
-}
-
 //Like Function
 function likeFunction(clicked_id) {
 	document.getElementById(clicked_id).className =

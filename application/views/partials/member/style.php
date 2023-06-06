@@ -19,6 +19,8 @@
 
 <!-- Aos Library -->
 <link rel="stylesheet" href="<?= base_url('assets/node_modules/aos/dist/aos.css') ?>">
+
+<!-- JQuery Library -->
 <script type="text/javascript" src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
 
 

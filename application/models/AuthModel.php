@@ -16,4 +16,11 @@ class AuthModel extends CI_Model
         );
         $this->db->insert('users', $data_user);
     }
+
+    public function getUserByUsername($email)
+    {
+        $this->db->where('email', $email);
+        $query = $this->db->get('users');
+        return $query->row();
+    }
 }

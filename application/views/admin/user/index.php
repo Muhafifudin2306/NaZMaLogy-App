@@ -100,7 +100,7 @@
 
 
             <?php if (!empty($courses)) : ?>
-            
+
                   <div class="col-md-6 pb-5 mb-5">
                         <?php if ($id_role != '1') : ?>
                               <section class="splide" aria-label="Splide Basic HTML Example">
@@ -121,31 +121,31 @@
                                                                               <div class="gallery-content bg-white p-4 border rounded-bottom">
                                                                                     <h6 class="ft-7 p-2 text-center"><?= $course->title ?></h6>
                                                                                     <div class="">
-                                                                                        <?php if(!empty($course->progress)) : ?>
-                                                                                          <?php
-                                                                                          $progress = $course->progress;
-                                                                                          $width = ($progress >= 100) ? 100 : $progress; // Menghindari lebar yang melebihi 100%
+                                                                                          <?php if (!empty($course->progress)) : ?>
+                                                                                                <?php
+                                                                                                $progress = $course->progress;
+                                                                                                $width = ($progress >= 100) ? 100 : $progress; // Menghindari lebar yang melebihi 100%
 
-                                                                                          ?>
-                                                                                          <div class="progress" style="height: 10px;">
-                                                                                                <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <?= $width ?>%;" aria-valuenow="<?= $width ?>" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                                          </div>
-                                                                                          <p class="text-lg text-center py-2"><?= round($progress) ?>%</p>
+                                                                                                ?>
+                                                                                                <div class="progress" style="height: 10px;">
+                                                                                                      <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: <?= $width ?>%;" aria-valuenow="<?= $width ?>" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                                </div>
+                                                                                                <p class="text-lg text-center py-2"><?= round($progress) ?>%</p>
                                                                                           <?php else : ?>
-                                                                                     <div class="progress" style="height: 10px;">
-                                                                                        <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
-                                                                                          </div>
-                                                                                          <p class="text-lg text-center py-2">0%</p>
-                                                                                    <?php endif ?>
+                                                                                                <div class="progress" style="height: 10px;">
+                                                                                                      <div class="progress-bar" role="progressbar" aria-label="Example with label" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                                                </div>
+                                                                                                <p class="text-lg text-center py-2">0%</p>
+                                                                                          <?php endif ?>
                                                                                     </div>
-                                                                                    
+
                                                                                     <a href="<?= base_url('userBranch/classpath/detail_course/' . $course->id) ?>">
                                                                                           <div class="course-detail">
                                                                                                 <button class="btn btn-danger bg-yellow w-100 ft-7">Lanjutkan
                                                                                                       Kelas</button>
                                                                                           </div>
                                                                                     </a>
-                                                                                    
+
                                                                               </div>
 
                                                                         </div>
@@ -156,15 +156,13 @@
                                           </ul>
                                     </div>
                               </section>
-                               <!-- ============== Splide Js =============== -->
-                                <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
-                                <script>
+                              <!-- ============== Splide Js =============== -->
+                              <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
                         <?php endif; ?>
                   </div>
             <?php endif; ?>
 
-
-            <!-- Cannot see the Analytics User When User Auth is not admin role -->
             <?php
             $analyticsClass = ($id_role != '1') ? 'd-none' : '';
             ?>
@@ -261,74 +259,74 @@
                   }
             });
       </script>
-      
+
       <?php if ($id_role == '1') : ?>
-        <?php if($course_count != 0 && $user_count != 0) : ?>
-            <script>
-                  document.addEventListener('DOMContentLoaded', function() {
-                        function animateValue(id, start, end, duration) {
+            <?php if ($course_count != 0 && $user_count != 0) : ?>
+                  <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                              function animateValue(id, start, end, duration) {
 
-                              var range = end - start;
-                              var current = start;
-                              var increment = end > start ? 1 : -1;
-                              var stepTime = Math.abs(Math.floor(duration / range));
+                                    var range = end - start;
+                                    var current = start;
+                                    var increment = end > start ? 1 : -1;
+                                    var stepTime = Math.abs(Math.floor(duration / range));
 
-                              var timer = setInterval(function() {
-                                    current += increment;
-                                    document.getElementById(id).textContent = current;
+                                    var timer = setInterval(function() {
+                                          current += increment;
+                                          document.getElementById(id).textContent = current;
 
-                                    if (current == end) {
-                                          clearInterval(timer);
-                                    }
-                              }, stepTime);
-                              var element = document.getElementById(id);
-                        }
+                                          if (current == end) {
+                                                clearInterval(timer);
+                                          }
+                                    }, stepTime);
+                                    var element = document.getElementById(id);
+                              }
 
-                        var CourseCountElement = document.getElementById('course_count');
-                        var targetNumber3 = <?php echo $course_count; ?>;
-                        var UserCourseElement = document.getElementById('user_count');
-                        var targetNumber4 = <?php echo $user_count; ?>;
+                              var CourseCountElement = document.getElementById('course_count');
+                              var targetNumber3 = <?php echo $course_count; ?>;
+                              var UserCourseElement = document.getElementById('user_count');
+                              var targetNumber4 = <?php echo $user_count; ?>;
 
 
-                        animateValue('course_count', 0, targetNumber3, 1000); // Angka awal 0, durasi 1000ms (1 detik)
-                        animateValue('user_count', 0, targetNumber4, 1000); // Angka awal 0, durasi 1000ms (1 detik)
-                  });
-            </script>
+                              animateValue('course_count', 0, targetNumber3, 1000); // Angka awal 0, durasi 1000ms (1 detik)
+                              animateValue('user_count', 0, targetNumber4, 1000); // Angka awal 0, durasi 1000ms (1 detik)
+                        });
+                  </script>
             <?php endif ?>
       <?php else : ?>
-      <?php if($course_count_user != 0 && $course_finish != 0) : ?>
-      <script>
-                  document.addEventListener('DOMContentLoaded', function() {
-                        function animateValue(id, start, end, duration) {
+            <?php if ($course_count_user != 0 && $course_finish != 0) : ?>
+                  <script>
+                        document.addEventListener('DOMContentLoaded', function() {
+                              function animateValue(id, start, end, duration) {
 
-                              var range = end - start;
-                              var current = start;
-                              var increment = end > start ? 1 : -1;
-                              var stepTime = Math.abs(Math.floor(duration / range));
+                                    var range = end - start;
+                                    var current = start;
+                                    var increment = end > start ? 1 : -1;
+                                    var stepTime = Math.abs(Math.floor(duration / range));
 
-                              var timer = setInterval(function() {
-                                    current += increment;
-                                    document.getElementById(id).textContent = current;
+                                    var timer = setInterval(function() {
+                                          current += increment;
+                                          document.getElementById(id).textContent = current;
 
-                                    if (current == end) {
-                                          clearInterval(timer);
-                                    }
-                              }, stepTime);
-                              var element = document.getElementById(id);
-                        }
+                                          if (current == end) {
+                                                clearInterval(timer);
+                                          }
+                                    }, stepTime);
+                                    var element = document.getElementById(id);
+                              }
 
-                        var CourseRunningElement = document.getElementById('running_course');
-                        var targetNumber1 = <?php echo $course_count_user; ?>;
-                        var FinishCourseElement = document.getElementById('finish_course');
-                        var targetNumber2 = <?php echo $course_finish; ?>;
+                              var CourseRunningElement = document.getElementById('running_course');
+                              var targetNumber1 = <?php echo $course_count_user; ?>;
+                              var FinishCourseElement = document.getElementById('finish_course');
+                              var targetNumber2 = <?php echo $course_finish; ?>;
 
-                        animateValue('running_course', 0, targetNumber1, 1000); // Angka awal 0, durasi 1000ms (1 detik)
-                        animateValue('finish_course', 0, targetNumber2, 1000); // Angka awal 0, durasi 1000ms (1 detik)
+                              animateValue('running_course', 0, targetNumber1, 1000); // Angka awal 0, durasi 1000ms (1 detik)
+                              animateValue('finish_course', 0, targetNumber2, 1000); // Angka awal 0, durasi 1000ms (1 detik)
 
-                  });
-                  <?php endif ?>
-            </script>
-      <?php endif; ?>
-  
+                        });
+                        <?php endif ?>
+                  </script>
+            <?php endif; ?>
+
 
 </body>

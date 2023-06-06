@@ -29,9 +29,15 @@
 
             <div class="d-flex gap-2 d-none d-md-inline">
                 <?php if ($this->session->userdata('is_login')) : ?>
-                    <a href="<?= site_url('userBranch/user/page') ?>">
-                        <button type="button" class="fw-bold btn btn-warning btn-orange-1 px-4 rounded-5">Beranda</button>
-                    </a>
+                    <?php if ($this->session->userdata('id_role') == 1) : ?>
+                        <a href="<?= site_url('adminRoot/user/page') ?>">
+                            <button type="button" class="fw-bold btn btn-warning btn-orange-1 px-4 rounded-5">Beranda</button>
+                        </a>
+                    <?php else : ?>
+                        <a href="<?= site_url('userBranch/user/page') ?>">
+                            <button type="button" class="fw-bold btn btn-warning btn-orange-1 px-4 rounded-5">Beranda</button>
+                        </a>
+                    <?php endif ?>
                 <?php else : ?>
                     <a class="text-decoration-none" href="<?= site_url('auth/register_page') ?>">
                         <button type="button" class="fw-bold btn btn-primary btn-blue-1 px-4 rounded-5">Daftar</button>

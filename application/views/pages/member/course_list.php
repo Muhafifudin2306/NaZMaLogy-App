@@ -15,24 +15,27 @@
     <link href="<?= base_url('assets/css/pages/member/course_list/style.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/search_front.css') ?>" rel="stylesheet">
 </head>
-<!-- Header -->
-<?php include(APPPATH . 'views/layout/member/header.php'); ?>
-<!-- Header -->
 
-<!-- Content -->
-<?php include(APPPATH . 'views/components/member/course_list.php'); ?>
-<!-- Content -->
+<body>
+    <!-- Header -->
+    <?php include(APPPATH . 'views/layout/member/header.php'); ?>
+    <!-- Header -->
 
-<!-- Footer -->
-<?php include(APPPATH . 'views/layout/member/footer.php'); ?>
-<!-- Footer -->
+    <!-- Content -->
+    <?php include(APPPATH . 'views/components/member/course_list.php'); ?>
+    <!-- Content -->
 
-<!-- Script -->
-<script type="text/javascript" src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
-<script type="text/javascript" src="<?= base_url('assets/js/search.js') ?>"></script>
-<?php include(APPPATH . 'views/partials/member/script.php'); ?>
+    <!-- Footer -->
+    <?php include(APPPATH . 'views/layout/member/footer.php'); ?>
+    <!-- Footer -->
 
-<!-- Script -->
+    <!-- Script -->
+    <script type="text/javascript" src="<?= base_url('assets/node_modules/jquery/dist/jquery.min.js') ?>"></script>
+    <script type="text/javascript" src="<?= base_url('assets/js/search.js') ?>"></script>
+    <?php include(APPPATH . 'views/partials/member/script.php'); ?>
+    <!-- Script -->
+</body>
+
 
 <body>
 

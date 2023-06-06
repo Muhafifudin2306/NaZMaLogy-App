@@ -35,6 +35,24 @@ if ($this->session->flashdata('success') != '') {
       })    
       </script>
       ";
+} else if ($this->session->flashdata('end_session') != '') {
+    echo "
+    <script>
+    Swal.fire({
+        toast: true,
+        position: 'top-right',
+        iconColor: 'white',
+        customClass: {
+            popup: 'colored-toast',
+        },
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        icon: 'error',
+        title: 'Akses Diblokir',
+    })    
+    </script>
+    ";
 }
 ?>
 <!-- section 1 - Hero Section -->

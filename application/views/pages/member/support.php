@@ -11,25 +11,24 @@
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/member/style.php'); ?>
 </head>
-<!-- Header -->
-<?php include(APPPATH . 'views/layout/member/header.php'); ?>
-<!-- Header -->
-
-<!-- Content -->
-<?php include(APPPATH . 'views/components/member/support.php'); ?>
-
-<!-- Content -->
-
-<!-- Footer -->
-<?php include(APPPATH . 'views/layout/member/footer.php'); ?>
-<!-- Footer -->
-
-<!-- Script -->
-<?php include(APPPATH . 'views/partials/member/script.php'); ?>
-<!-- Script -->
 
 <body>
+    <!-- Header -->
+    <?php include(APPPATH . 'views/layout/member/header.php'); ?>
+    <!-- Header -->
 
+    <!-- Content -->
+    <?php include(APPPATH . 'views/components/member/support.php'); ?>
+
+    <!-- Content -->
+
+    <!-- Footer -->
+    <?php include(APPPATH . 'views/layout/member/footer.php'); ?>
+    <!-- Footer -->
+
+    <!-- Script -->
+    <?php include(APPPATH . 'views/partials/member/script.php'); ?>
+    <!-- Script -->
 </body>
 
 </html>

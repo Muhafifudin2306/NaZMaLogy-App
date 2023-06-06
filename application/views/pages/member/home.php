@@ -14,24 +14,24 @@
     <!-- External CSS -->
     <link href="<?= base_url('assets/css/pages/member/home/style.css') ?>" rel="stylesheet">
 </head>
-<!-- Header -->
-<?php include(APPPATH . 'views/layout/member/header.php'); ?>
-<!-- Header -->
-
-<!-- Content -->
-<?php include(APPPATH . 'views/components/member/home.php'); ?>
-<!-- Content -->
-
-<!-- Footer -->
-<?php include(APPPATH . 'views/layout/member/footer.php'); ?>
-<!-- Footer -->
-
-<!-- Script -->
-<?php include(APPPATH . 'views/partials/member/script.php'); ?>
-<!-- Script -->
 
 <body>
+    <!-- Header -->
+    <?php include(APPPATH . 'views/layout/member/header.php'); ?>
+    <!-- Header -->
 
+    <!-- Content -->
+    <?php include(APPPATH . 'views/components/member/home.php'); ?>
+    <!-- Content -->
+
+    <!-- Footer -->
+    <?php include(APPPATH . 'views/layout/member/footer.php'); ?>
+    <!-- Footer -->
+
+    <!-- Script -->
+    <?php include(APPPATH . 'views/partials/member/script.php'); ?>
+    <!-- Script -->
 </body>
+
 
 </html>
