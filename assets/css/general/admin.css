@@ -14,9 +14,6 @@
     --default-2: #A8AEFF;
     --default-3: #ffff;
     --black-1: #1a181d;
-    --font-size-7: 0.9rem;
-    --font-size-8: 0.8rem;
-    --font-size-9: 0.7rem;
 }
 
 :root {
@@ -145,15 +142,15 @@ a {
 }
 
 .fs-7 {
-    font-size: var(--font-size-7) !important;
+    font-size: 0.9rem !important;
 }
 
 .fs-8 {
-    font-size: var(--font-size-8) !important;
+    font-size: 0.8rem !important;
 }
 
 .fs-9 {
-    font-size: var(--font-size-9) !important;
+    font-size: 0.7rem !important;
 }
 
 /* Alert */

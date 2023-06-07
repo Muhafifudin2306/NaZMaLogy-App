@@ -121,13 +121,13 @@
 
 @media screen and (max-width: 1002px) and (min-width: 762px) {
     .list-lg {
-        width: 50%;
+        width: 50% !important;
     }
 }
 
 @media screen and (max-width: 762px) {
     .list-lg {
-        width: 100%;
+        width: 100% !important;
     }
 }
 

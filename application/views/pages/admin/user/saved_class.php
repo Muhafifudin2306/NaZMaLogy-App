@@ -27,7 +27,7 @@
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
     <script>
-        var nodesSameClass = document.getElementsByClassName("card-area");
+        var nodesSameClass = document.getElementsByClassName("card-class");
 
         for (let i = 1; i <= nodesSameClass.length * 2; i++) {
             if (i % 2 == 1) {

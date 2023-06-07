@@ -19,10 +19,6 @@
 
 <link href="<?= base_url('assets/css/layout/admin/header.css') ?>" rel="stylesheet">
 <link href="<?= base_url('assets/css/layout/admin/sidebar.css') ?>" rel="stylesheet">
-<link href="<?= base_url('assets/css/pages/admin/dashboard/style.css') ?>" rel="stylesheet">
-
-
-<!-- <link rel="stylesheet" href="<?= base_url('assets/css/admin/admin_style.css') ?>"> -->
 <link rel="stylesheet" href="<?= base_url('assets/css/search.css') ?>">
 
 

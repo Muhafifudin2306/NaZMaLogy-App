@@ -43,7 +43,7 @@
     </div>
     <div class="user_panel">
         <div class="dropdown">
-            <div class="profile"> <i class="bx bx-log-out fs-5 px-4"></i>
+            <div class="profile"> <i class="bx bx-log-out fs-5 px-3"></i>
                 <div class="dropdown-content">
                     <ul>
                         <li onclick="LandingPage()"><i class="bi bi-rocket-takeoff"></i><span>Landing Page</span></li>

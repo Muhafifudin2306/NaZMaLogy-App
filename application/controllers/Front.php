@@ -37,7 +37,7 @@ class Front extends CI_Controller
                   if ($userHasCourse && $userHasCourse->status == 1) {
                         $class->button_label = 'Lanjutkan';
                   } else {
-                        $class->button_label = '+ Ikuti Kelas';
+                        $class->button_label = 'Ikuti Kelas';
                   }
             }
             $this->load->view('pages/member/course_list', $data);
@@ -49,6 +49,16 @@ class Front extends CI_Controller
                   'categories' => $this->CategoryModel->get_data_category(),
                   'course' => $this->CourseModel->get_data_course_asc_non_auth()
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = 'Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 
@@ -59,6 +69,16 @@ class Front extends CI_Controller
                   'categories' => $this->CategoryModel->get_data_category(),
                   'course' => $this->CourseModel->get_data_course_az_non_auth()
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = 'Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 
@@ -68,6 +88,16 @@ class Front extends CI_Controller
                   'categories' => $this->CategoryModel->get_data_category(),
                   'course' => $this->CourseModel->get_data_course_za_non_auth()
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = 'Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 
@@ -95,6 +125,16 @@ class Front extends CI_Controller
                   'course' => $query->result(),
                   'selected_categories' => $categories
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = 'Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 
@@ -118,6 +158,16 @@ class Front extends CI_Controller
                   'categories' => $this->CategoryModel->get_data_category(),
                   'course' => $query
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = 'Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 
