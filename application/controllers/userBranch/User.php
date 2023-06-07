@@ -162,21 +162,6 @@ class User extends CI_Controller
 
             $this->load->view('pages/admin/user/saved_class', $data);
       }
-      public function setting()
-      {
-            $data = [
-                  'id_user' => $this->session->userdata('id'),
-                  'id_role' => $this->session->userdata('id_role'),
-                  'users' => $this->UserModel->get_all_user(),
-                  'subscribes' => $this->UserModel->get_all_subscribe(),
-                  'testimonies' => $this->UserModel->get_all_testimony()
-            ];
-            $this->load->view('admin/user/style');
-            $this->load->view('admin/user/menubar', $data);
-            $this->load->view('admin/user/setting');
-            $this->load->view('admin/user/script');
-      }
-
 
       public function profile()
       {
@@ -255,102 +240,6 @@ class User extends CI_Controller
             $progress = ($completedClasses / $videoCount) * 100;
 
             echo "Progress belajar: " . $progress . "%";
-      }
-
-
-      // Testimony
-      public function add_testimony()
-      {
-            $data = [
-                  'id_user' => $this->session->userdata('id'),
-                  'id_role' => $this->session->userdata('id_role')
-            ];
-            $this->load->view('admin/user/style');
-            $this->load->view('admin/user/menubar', $data);
-            $this->load->view('admin/user/testimony/add');
-            $this->load->view('admin/user/script');
-      }
-
-      public function save_testimony()
-      {
-            //load library upload
-            $this->load->library('upload');
-
-            //konfigurasi upload
-            $config['upload_path'] = './assets/images/admin/testimony/';
-            $config['allowed_types'] = '*';
-            $config['max_size'] = 10000;
-
-            //inisialisasi upload
-            $this->upload->initialize($config);
-
-            //jika gagal upload
-            if (!$this->upload->do_upload('image')) {
-                  $error = array('error' => $this->upload->display_errors());
-                  redirect('userBranch/user/setting', $error);
-            }
-            //jika berhasil upload
-            else {
-                  $data = array(
-                        'author' => $this->input->post('author', TRUE),
-                        'message' => $this->input->post('message', TRUE),
-                        'job' => $this->input->post('job', TRUE),
-                        'rating' => $this->input->post('rating', TRUE),
-                        'image' => $this->upload->data('file_name')
-                  );
-
-
-                  if ($this->UserModel->insert_data_testimony($data)) {
-                        $this->session->set_flashdata(
-                              'success_add',
-                              'Success Add Testimony'
-                        );
-                        redirect('userBranch/user/setting');
-                  }
-            }
-      }
-
-      public function delete_testimony($id)
-      {
-            $where = array('id' => $id);
-            $this->db->where($where);
-            $this->db->delete('testimonies');
-            // Menampilkan pesan sukses dan redirect ke halaman lain
-            $this->session->set_flashdata('success_delete_user', 'Data berhasil dihapus');
-            redirect('userBranch/user/setting');
-      }
-
-      function edit_testimony($id)
-      {
-            $where = array('id' => $id);
-            $data = [
-                  'id_role' => $this->session->userdata('id_role'),
-                  'id_user' => $this->session->userdata('id'),
-                  'testimony' => $this->UserModel->get_testimony_by_id($id)
-            ];
-            $this->load->view('admin/user/style');
-            $this->load->view('admin/user/menubar', $data);
-            $this->load->view('admin/user/testimony/edit');
-            $this->load->view('admin/user/script');
-      }
-
-      public function update_testimony($id)
-      {
-
-            $data = array(
-                  'author' => $this->input->post('author', TRUE),
-                  'status' => $this->input->post('status', TRUE),
-                  'message' => $this->input->post('message', TRUE),
-                  'job' => $this->input->post('job', TRUE),
-                  'rating' => $this->input->post('rating', TRUE),
-                  'id' => $id
-
-            );
-            $this->UserModel->updateTestimony($id, $data);
-
-            $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
-
-            redirect('userBranch/user/setting');
       }
 
 

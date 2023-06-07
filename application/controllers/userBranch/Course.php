@@ -17,19 +17,6 @@ class Course extends CI_Controller
             redirect('auth/login_page');
         }
     }
-    public function class_admin()
-    {
-        $data = [
-            'id_user' => $this->session->userdata('id'),
-            'id_role' => $this->session->userdata('id_role'),
-            'categories' => $this->CategoryModel->get_data_category(),
-            'course' => $this->CourseModel->get_data_course_admin()
-        ];
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/class_admin');
-        $this->load->view('admin/user/script');
-    }
     public function add_category()
     {
         $data = [

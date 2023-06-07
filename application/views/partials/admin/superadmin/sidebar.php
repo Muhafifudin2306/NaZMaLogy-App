@@ -7,17 +7,17 @@
                 <span class="nav_logo-name">NaZMaLogy</span>
             </a>
             <div class="nav_list">
-                <a href="<?= site_url('/userBranch/user/page') ?>" class="nav_link <?= ($this->uri->segment(3) === "page_dash") ? "active" : "" ?>">
-                    <i class="bx bx<?= ($this->uri->segment(3) === "page_dash") ? "s" : "" ?>-grid-alt nav_icon"></i>
+                <a href="<?= site_url('/adminRoot/user/page') ?>" class="nav_link <?= ($this->uri->segment(3) === "page") ? "active" : "" ?>">
+                    <i class="bx bx<?= ($this->uri->segment(3) === "page") ? "s" : "" ?>-grid-alt nav_icon"></i>
                     <span class="nav_name">Dashboard</span>
                 </a>
                 <!-- Pengaturan Akses -->
-                <a href="<?= site_url('/userBranch/user/setting') ?>" class="nav_link <?= ($this->uri->segment(3) === "setting") ? "active" : "" ?>">
-                    <i class="bx bx<?= ($this->uri->segment(3) === "setting") ? "s" : "" ?>-cog nav_icon"></i>
+                <a href="<?= site_url('/adminRoot/setting') ?>" class="nav_link <?= ($this->uri->segment(2) === "setting") ? "active" : "" ?>">
+                    <i class="bx bx<?= ($this->uri->segment(2) === "setting") ? "s" : "" ?>-cog nav_icon"></i>
                     <span class="nav_name">Pengaturan Akses</span>
                 </a>
                 <!-- Pengaturan Kelas -->
-                <a href="<?= site_url('/userBranch/course/class_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "class_admin") ? "active" : "" ?>">
+                <a href="<?= site_url('/adminRoot/course/class_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "class_admin") ? "active" : "" ?>">
                     <i class="bx bx<?= ($this->uri->segment(3) === "class_admin") ? "s" : "" ?>-book-alt nav_icon"></i>
                     <span class="nav_name">Pengaturan Kelas</span>
                 </a>
