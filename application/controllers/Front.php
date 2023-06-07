@@ -7,6 +7,7 @@ class Front extends CI_Controller
       {
             parent::__construct();
             $this->load->model('FrontModel');
+            $this->load->model('UserModel');
             $this->load->model('CourseModel');
             $this->load->model('CategoryModel');
       }
@@ -29,6 +30,16 @@ class Front extends CI_Controller
                   'categories' => $this->CategoryModel->get_data_category(),
                   'course' => $this->CourseModel->get_data_course_non_auth()
             ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($this->session->userdata('id'), $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = '+ Ikuti Kelas';
+                  }
+            }
             $this->load->view('pages/member/course_list', $data);
       }
 

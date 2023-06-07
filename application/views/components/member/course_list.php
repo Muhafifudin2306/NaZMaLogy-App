@@ -88,8 +88,8 @@
                                                 <?php
                                                 $category = explode(',', $data->category);
                                                 foreach ($category as $kat) {
-                                                    echo
-                                                    "<span class='py-1 px-3 bg-warning fw-medium border-0 rounded' style='font-size:13px'>" . $kat . "</span>";
+                                                    echo "
+                                                    <span class='py-1 px-3 bg-orange-2 rounded text-white fs-8'>" . $kat . "</span>";
                                                 }
                                                 ?>
                                             </div>
@@ -100,53 +100,20 @@
                                                 <div class="d-flex justify-content-between">
                                                     <div class="detail-bottom">
                                                         <?php if ($this->session->userdata('is_login')) : ?>
-                                                            <?php echo anchor('userBranch/classpath/detail_course/' . $data->id, "
-                                                        <button class='btn btn-primary btn-blue-1 text-xl border-first'>+ Ikuti</button>
-                                                    "); ?>
+                                                            <?php if ($data->button_label == 'Lanjutkan') : ?>
+                                                                <a href="<?= site_url('userBranch/classpath/detail_course/' . $data->id) ?>">
+                                                                    <button class='btn btn-primary btn-blue-2 fw-bold'><i class='bi bi-play-fill fs-7 px-1'></i>Lanjutkan</button>
+                                                                </a>
+                                                            <?php else : ?>
+                                                                <a href="<?= site_url('userBranch/classpath/detail_course/' . $data->id) ?>">
+                                                                    <button class='btn btn-primary btn-blue-1 fw-bold'><i class="bi bi-plus"></i> Ikuti</button>
+                                                                </a>
+                                                            <?php endif; ?>
                                                         <?php else : ?>
 
                                                             <button id="myButton<?= $no++ ?>" class='btn btn-primary btn-blue-1 text-xl border-first'>+ Ikuti</button>
 
                                                         <?php endif; ?>
-                                                        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.3/dist/sweetalert2.all.min.js"></script>
-
-                                                        <script>
-                                                            // Fungsi yang dipanggil saat tombol di klik
-                                                            function handleClick(buttonId) {
-
-                                                                // Pengguna belum memiliki akun, tampilkan SweetAlert dialog
-                                                                Swal.fire({
-                                                                    title: '<h3 class="text-black fw-bold">' + 'Mulai Belajar Sekarang' + '</h3>',
-                                                                    text: 'Apakah Anda sudah memiliki akun?',
-                                                                    icon: 'question',
-                                                                    showCancelButton: true,
-                                                                    confirmButtonText: 'Ya, Login',
-                                                                    cancelButtonText: 'Belum, Sign Up'
-                                                                }).then((result) => {
-                                                                    if (result.isConfirmed) {
-                                                                        // Jika pengguna memilih untuk login, arahkan ke halaman login
-                                                                        window.location.href = '<?= site_url('auth/login_page') ?>'; // Ganti dengan URL halaman login Anda
-                                                                    } else {
-                                                                        // Jika pengguna memilih untuk sign up, arahkan ke halaman sign up
-                                                                        window.location.href = '<?= site_url('auth/register_page') ?>'; // Ganti dengan URL halaman sign up Anda
-                                                                    }
-                                                                });
-
-                                                            }
-                                                            // Menampilkan hasil hitung pada elemen dengan ID "countResult"
-                                                            var countResult = document.getElementsByClassName('card-class').length;
-                                                            for (var i = 1; i <= countResult; i++) {
-                                                                var buttonId = 'myButton' + i;
-                                                                var button = document.getElementById(buttonId);
-
-                                                                // Menetapkan fungsi handleClick dengan argumen buttonId sebagai fungsi yang dipanggil saat tombol di klik
-                                                                button.onclick = function(id) {
-                                                                    return function() {
-                                                                        handleClick(id);
-                                                                    };
-                                                                }(buttonId);
-                                                            }
-                                                        </script>
                                                     </div>
                                                 </div>
                                             </div>
@@ -214,22 +181,3 @@
         </div>
     </div>
 </section>
-<script>
-    const selectElement = document.getElementById('my-select');
-
-    selectElement.addEventListener('change', () => {
-        const selectedValue = selectElement.value;
-        if (selectedValue) {
-            window.location.href = selectedValue;
-        }
-    });
-
-    const selectElementPhone = document.getElementById('my-select-phone');
-
-    selectElementPhone.addEventListener('change', () => {
-        const selectedValue = selectElementPhone.value;
-        if (selectedValue) {
-            window.location.href = selectedValue;
-        }
-    });
-</script>

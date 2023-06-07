@@ -138,6 +138,30 @@ class User extends CI_Controller
             $this->load->view('admin/user/savedClass');
             $this->load->view('admin/user/script');
       }
+
+      public function saved_course()
+      {
+
+            $data = [
+                  'id_role' => $this->session->userdata('id_role'),
+                  'id_user' => $this->session->userdata('id'),
+                  'categories' => $this->CategoryModel->get_data_category(),
+                  'course' => $this->CourseModel->get_course($this->session->userdata('id'))
+            ];
+            // Loop melalui data kelas
+            foreach ($data['course'] as &$class) {
+                  $userHasCourse = $this->UserModel->getUserHasCourse($data['id_user'], $class->id);
+
+                  if ($userHasCourse && $userHasCourse->status == 1) {
+                        $class->button_label = 'Lanjutkan';
+                  } else {
+                        $class->button_label = '+ Ikuti Kelas';
+                  }
+            }
+
+
+            $this->load->view('pages/admin/user/saved_class', $data);
+      }
       public function setting()
       {
             $data = [

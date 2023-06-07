@@ -93,6 +93,17 @@ a {
     border-color: var(--blue-2) !important;
 }
 
+.btn-blue-2 {
+    background-color: var(--blue-2) !important;
+    border-color: var(--blue-2) !important;
+    color: var(--default-3) !important;
+}
+
+.btn-blue-2:hover {
+    background-color: var(--blue-3) !important;
+    border-color: var(--blue-3) !important;
+}
+
 .btn-orange-1 {
     background-color: var(--orange-2) !important;
     border-color: var(--orange-2) !important;

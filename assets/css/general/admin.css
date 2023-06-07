@@ -89,6 +89,7 @@ a {
     background-color: var(--blue-2) !important;
 }
 
+
 .bg-blue-3 {
     background-color: var(--blue-3) !important;
 }
@@ -116,6 +117,17 @@ a {
 }
 
 .btn-blue-1:hover {
+    background-color: var(--blue-2) !important;
+    border-color: var(--blue-2) !important;
+}
+
+.btn-blue-2 {
+    background-color: var(--blue-3) !important;
+    border-color: var(--blue-3) !important;
+    color: var(--default-3) !important;
+}
+
+.btn-blue-2:hover {
     background-color: var(--blue-2) !important;
     border-color: var(--blue-2) !important;
 }
