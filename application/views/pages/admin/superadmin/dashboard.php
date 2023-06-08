@@ -11,7 +11,8 @@
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
     <link rel="stylesheet" href="<?= base_url('assets/css/pages/admin/dashboard/style.css') ?>">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
 </head>
 
 <body id="body-pd">
@@ -29,9 +30,8 @@
 
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
-
+    <script src="<?= base_url('assets/node_modules/charts/chart.js') ?>"></script>
     <!-- Analytics User Management Script -->
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script>
         var ctx = document.getElementById('UserChart').getContext('2d');
         var myChart = new Chart(ctx, {

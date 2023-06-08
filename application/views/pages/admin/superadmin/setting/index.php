@@ -10,8 +10,6 @@
 
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
-    <script src="<?php echo base_url('assets/node_modules/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
-
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/node_modules/datatables.net-dt/css/jquery.dataTables.css'); ?>">
     <script src="<?php echo base_url('assets/node_modules/datatables.net-dt/js/jquery.dataTables.js'); ?>"></script>
 

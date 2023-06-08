@@ -12,8 +12,8 @@
                     <span class="nav_name">Dashboard</span>
                 </a>
                 <!-- Pengaturan Akses -->
-                <a href="<?= site_url('/adminRoot/setting') ?>" class="nav_link <?= ($this->uri->segment(2) === "setting") ? "active" : "" ?>">
-                    <i class="bx bx<?= ($this->uri->segment(2) === "setting") ? "s" : "" ?>-cog nav_icon"></i>
+                <a href="<?= site_url('/adminRoot/setting') ?>" class="nav_link <?= ($this->uri->segment(2) === "setting" || $this->uri->segment(3) === "edit_user") ? "active" : "" ?>">
+                    <i class="bx bx<?= ($this->uri->segment(2) === "setting" || $this->uri->segment(3) === "edit_user") ? "s" : "" ?>-cog nav_icon"></i>
                     <span class="nav_name">Pengaturan Akses</span>
                 </a>
                 <!-- Pengaturan Kelas -->
@@ -22,7 +22,7 @@
                     <span class="nav_name">Pengaturan Kelas</span>
                 </a>
                 <!-- Pengaturan Video -->
-                <a href="<?= site_url('/userBranch/playlist/video_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "video_admin") ? "active" : "" ?>">
+                <a href="<?= site_url('/adminRoot/playlist/video_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "video_admin") ? "active" : "" ?>">
                     <i class="bx bxs-playlist nav_icon"></i>
                     <span class="nav_name">Control Video</span>
                 </a>

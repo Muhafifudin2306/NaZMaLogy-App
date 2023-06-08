@@ -11,8 +11,8 @@
                 $activeSegment = $this->uri->segment(3);
                 ?>
                 <!-- Dashbaord -->
-                <a href="<?= site_url('/userBranch/user/page') ?>" class="nav_link <?= ($activeSegment === "page_dash") ? "active" : "" ?>">
-                    <i class="bx bx<?= ($activeSegment === "page_dash") ? "s" : "" ?>-grid-alt nav_icon"></i>
+                <a href="<?= site_url('/userBranch/user/page') ?>" class="nav_link <?= ($activeSegment === "page") ? "active" : "" ?>">
+                    <i class="bx bx<?= ($activeSegment === "page") ? "s" : "" ?>-grid-alt nav_icon"></i>
                     <span class="nav_name">Dashboard</span>
                 </a>
                 <!-- Kursus Tersedia -->
@@ -24,7 +24,7 @@
                 <?php
                 $activeClass = ($activeSegment === "savedClass") ? "active" : "";
                 ?>
-                <a href="<?= base_url('/userBranch/user/savedClass/' . $id_user) ?>" class="nav_link <?= $activeClass ?>">
+                <a href="<?= base_url('/userBranch/user/savedClass') ?>" class="nav_link <?= $activeClass ?>">
                     <i class="bx bx<?= ($activeSegment === "savedClass") ? "s" : "" ?>-bookmark nav_icon"></i>
                     <span class="nav_name">Tersimpan</span>
                 </a>

@@ -8,7 +8,7 @@
                         <a href="<?= base_url('userBranch/playlist/video_admin') ?>"><i class="bi bi-x-lg text-black"></i></a>
                     </div>
                     <hr>
-                    <form method="post" action="<?= base_url('userBranch/playlist/save_playlist') ?>">
+                    <form method="post" action="<?= base_url('adminRoot/playlist/save_playlist') ?>">
                         <div class="mb-3">
                             <label class="form-label fw-bold" for="name">Nama Playlist<span class="text-danger">*</span></label>
                             <input type="text" id="name" name="name" class="form-control" placeholder="Playlist xx">

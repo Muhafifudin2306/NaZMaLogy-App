@@ -6,9 +6,10 @@
                 <?php
                 $activeSegment = $this->uri->segment(3);
                 $activeClass = ($activeSegment === "page") ? "active-link" : "";
+                $activeSetting = ($this->uri->segment(2) === "setting" || $this->uri->segment(3) === "edit_user") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
-                    <a href="<?= site_url('/userBranch/user/page') ?>" class="nav__link <?= $activeClass ?>">
+                    <a href="<?= site_url('/adminRoot/user/page') ?>" class="nav__link <?= $activeClass ?>">
                         <i class="bx bx<?= ($activeSegment === "page") ? "s" : "" ?>-home-alt-2 nav__icon"></i>
                     </a>
                 </li>
@@ -17,7 +18,7 @@
                 $activeClass = ($activeSegment === "setting") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
-                    <a href="<?= site_url('/userBranch/user/setting') ?>" class="nav__link <?= $activeClass ?>">
+                    <a href="<?= site_url('/adminRoot/setting') ?>" class="nav__link <?= $activeSetting ?>">
                         <i class="bx bx<?= ($activeSegment === "setting") ? "s" : "" ?>-cog nav__icon"></i>
                     </a>
                 </li>
@@ -35,7 +36,7 @@
                 $activeClass = ($activeSegment === "video_admin") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
-                    <a href="<?= site_url('/userBranch/playlist/video_admin') ?>" class="nav__link <?= $activeClass ?>">
+                    <a href="<?= site_url('/adminRoot/playlist/video_admin') ?>" class="nav__link <?= $activeClass ?>">
                         <i class="bx bxs-playlist nav__icon"></i>
                     </a>
                 </li>

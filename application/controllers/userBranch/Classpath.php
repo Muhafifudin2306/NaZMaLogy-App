@@ -37,32 +37,6 @@ class Classpath extends CI_Controller
             if ($userHasCourse && $userHasCourse->status == 1) {
                 $class->button_label = 'Lanjutkan';
             } else {
-                $class->button_label = '+ Ikuti Kelas';
-            }
-        }
-
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass', $data);
-        $this->load->view('admin/user/script');
-    }
-
-    public function list_class()
-    {
-        $data = [
-            'id_role' => $this->session->userdata('id_role'),
-            'id_user' => $this->session->userdata('id'),
-            'categories' => $this->CategoryModel->get_data_category(),
-            'course' => $this->CourseModel->get_data_course()
-        ];
-
-        // Loop melalui data kelas
-        foreach ($data['course'] as &$class) {
-            $userHasCourse = $this->UserModel->getUserHasCourse($data['id_user'], $class->id);
-
-            if ($userHasCourse && $userHasCourse->status == 1) {
-                $class->button_label = 'Lanjutkan';
-            } else {
                 $class->button_label = 'Ikuti Kelas';
             }
         }

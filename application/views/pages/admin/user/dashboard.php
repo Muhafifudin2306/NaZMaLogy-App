@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Dashboard Pengguna NaZMaLogy </title>
+    <title> Dashboard Pengguna | NaZMaLogy </title>
 
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
+    <link rel="stylesheet" href="<?= base_url('assets/css/pages/admin/dashboard/style.css') ?>">
 
     <!-- ============== Splide CSS ================= -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+    <link rel="stylesheet" href="<?= base_url('assets/node_modules/@splidejs/splide/dist/css/splide.min.css') ?>">
+    <script src="<?= base_url('assets/node_modules/@splidejs/splide/dist/js/splide.min.js') ?>"></script>
 </head>
 
 <body id="body-pd">
@@ -30,7 +32,8 @@
 
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
+
+
     <script>
         var splide = new Splide('.splide', {
             type: 'loop',

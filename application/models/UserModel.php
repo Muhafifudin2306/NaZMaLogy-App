@@ -45,6 +45,7 @@ class UserModel extends CI_Model
     {
         $this->db->select('users.*, roles.id AS id_role, roles.name AS roles_name, ');
         $this->db->join('roles', 'users.id_role = roles.id');
+        $this->db->order_by('created_at', 'desc');
         $this->db->from('users');
         $query = $this->db->get();
         return $query->result();
@@ -52,12 +53,14 @@ class UserModel extends CI_Model
 
     public function get_all_subscribe()
     {
+        $this->db->order_by('created_at', 'desc');
         $query = $this->db->get('subscribes');
         return $query->result();
     }
 
     public function get_all_testimony()
     {
+        $this->db->order_by('created_at', 'desc');
         $query = $this->db->get('testimonies');
         return $query->result();
     }

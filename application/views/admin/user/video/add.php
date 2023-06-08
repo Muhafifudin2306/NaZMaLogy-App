@@ -16,7 +16,7 @@
                         <a href="<?= base_url('userBranch/playlist/video_admin') ?>"><i class="bi bi-x-lg text-black"></i></a>
                     </div>
                     <hr>
-                    <form method="post" action="<?= base_url('userBranch/playlist/save_video') ?>?>">
+                    <form method="post" action="<?= base_url('adminRoot/playlist/save_video') ?>?>">
                         <div class="mb-3">
                             <label for="exampleInputname1" class="form-label fw-bold">Judul Video
                                 <span class="text-danger">*</span>
