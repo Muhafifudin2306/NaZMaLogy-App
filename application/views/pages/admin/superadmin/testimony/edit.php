@@ -10,6 +10,7 @@
 
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
+    <script src="<?php echo base_url('assets/node_modules/ckeditor/ckeditor.js'); ?>"></script>
 
 </head>
 
@@ -28,6 +29,10 @@
 
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
+    <script>
+        // Inisialisasi CKEditor pada textarea dengan ID 'message'
+        CKEDITOR.replace('message');
+    </script>
     <!-- Script -->
 </body>
 

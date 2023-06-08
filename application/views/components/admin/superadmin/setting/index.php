@@ -82,30 +82,9 @@ if ($this->session->flashdata('success_update') != '') {
                                     <td>
                                         <div class="d-flex gap-2 justify-content-center">
                                             <?php echo anchor('adminRoot/setting/edit_testimony/' . $row->id, "<button class='btn btn-primary btn-blue-1 fs-7'><i class='bi bi-pen fs-7'></i></button>"); ?>
-                                            <button onclick="deleteConfirmation(<?php echo $row->id; ?>)" class="btn btn-danger btn-orange-1 text-white fs-7">
+                                            <button onclick="testimonyDeleteConfirmation(<?php echo $row->id; ?>)" class="btn btn-danger btn-orange-1 text-white fs-7">
                                                 <span class='text-white'><i class='bi bi-trash3-fill fs-7'></i></span>
                                             </button>
-
-                                            <script>
-                                                function deleteConfirmation(id) {
-                                                    Swal.fire({
-                                                        title: '<h3 class="fw-bold text-black">Konfirmasi</h3>',
-                                                        text: 'Apakah Anda yakin ingin menghapus data ini?',
-                                                        icon: 'warning',
-                                                        showCancelButton: true,
-                                                        confirmButtonColor: '#2c2f75',
-                                                        cancelButtonColor: '#6c757d',
-                                                        confirmButtonText: 'Ya, Hapus',
-                                                        cancelButtonText: 'Batal'
-                                                    }).then((result) => {
-                                                        if (result.isConfirmed) {
-                                                            // Redirect ke fungsi delete_testimony dengan ID sebagai parameter
-                                                            window.location = '<?php echo site_url('adminRoot/setting/delete_testimony/'); ?>' + id;
-                                                        }
-                                                    });
-                                                }
-                                            </script>
-
                                         </div>
                                     </td>
                                 </tr>
@@ -180,8 +159,9 @@ if ($this->session->flashdata('success_update') != '') {
                             <td><?php echo $row->roles_name; ?></td>
                             <td>
                                 <div class="d-flex gap-2 justify-content-center">
-                                    <?php echo anchor('userBranch/user/edit_user/' . $row->id, "<button class='btn btn-primary btn-blue-1'><i class='bi bi-pen fs-7'></i></button>"); ?>
-                                    <button onclick="return confirm('Do you want delete this record')" class="btn btn-danger text-white btn-orange-1"> <?php echo anchor('userBranch/user/delete_user/' . $row->id, "<span class='text-white'><i class='bi bi-trash3-fill fs-7'></i></span>"); ?>
+                                    <?php echo anchor('adminRoot/user/edit_user/' . $row->id, "<button class='btn btn-primary btn-blue-1'><i class='bi bi-pen fs-7'></i></button>"); ?>
+                                    <button onclick="userDeleteConfirmation(<?php echo $row->id; ?>)" class="btn btn-danger btn-orange-1 text-white fs-7">
+                                        <span class='text-white'><i class='bi bi-trash3-fill fs-7'></i></span>
                                     </button>
                                 </div>
                             </td>

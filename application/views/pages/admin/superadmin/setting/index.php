@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Laman Pengaturan Website | NaZMaLogy </title>
+    <title> Pengaturan Website | NaZMaLogy </title>
 
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
@@ -61,6 +61,47 @@
                 document.body.removeChild(textarea);
             }
         });
+    </script>
+
+    <script>
+        function testimonyDeleteConfirmation(id) {
+            Swal.fire({
+                title: '<h3 class="fw-bold text-black">Konfirmasi</h3>',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#2c2f75',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke fungsi delete_testimony dengan ID sebagai parameter
+                    window.location = '<?php echo site_url('adminRoot/setting/delete_testimony/'); ?>' + id;
+                }
+            });
+        }
+    </script>
+
+
+    <script>
+        function userDeleteConfirmation(id) {
+            Swal.fire({
+                title: '<h3 class="fw-bold text-black">Konfirmasi</h3>',
+                text: 'Apakah Anda yakin ingin menghapus data ini?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#2c2f75',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Ya, Hapus',
+                cancelButtonText: 'Batal'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirect ke fungsi delete_testimony dengan ID sebagai parameter
+                    window.location = '<?php echo site_url('adminRoot/user/delete_user/'); ?>' + id;
+                }
+            });
+        }
     </script>
 
     <script>

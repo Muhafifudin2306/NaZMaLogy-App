@@ -142,20 +142,40 @@ class Setting extends CI_Controller
 
     public function update_testimony($id)
     {
+        // Validasi input
+        $this->form_validation->set_rules('author', 'Nama Pengguna', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('message', 'Pesan Testimoni', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('job', 'Pekerjaan', 'trim|required');
+        $this->form_validation->set_rules('rating', 'Rating', 'trim|required');
 
-        $data = array(
-            'author' => $this->input->post('author', TRUE),
-            'status' => $this->input->post('status', TRUE),
-            'message' => $this->input->post('message', TRUE),
-            'job' => $this->input->post('job', TRUE),
-            'rating' => $this->input->post('rating', TRUE),
-            'id' => $id
+        // Cek validasi
+        //jika validasi gagal
+        if ($this->form_validation->run() == false) {
+            $data['error'] = validation_errors();
+            $data = [
+                'id_role' => $this->session->userdata('id_role'),
+                'id_user' => $this->session->userdata('id'),
+                'testimony' => $this->UserModel->get_testimony_by_id($id)
+            ];
+            $this->load->view('pages/admin/superadmin/testimony/edit', $data);
+        } else {
+            // Validasi berhasil, lakukan pembaruan data
 
-        );
-        $this->UserModel->updateTestimony($id, $data);
+            $data = array(
+                'author' => $this->input->post('author', TRUE),
+                'status' => $this->input->post('status', TRUE),
+                'message' => $this->input->post('message', TRUE),
+                'job' => $this->input->post('job', TRUE),
+                'rating' => $this->input->post('rating', TRUE),
+                'id' => $id
+            );
 
-        $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
+            $this->UserModel->updateTestimony($id, $data);
 
-        redirect('userBranch/user/setting');
+            $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
+
+            redirect('adminRoot/setting');
+        }
     }
 }
