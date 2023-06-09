@@ -22,7 +22,7 @@
                     <span class="nav_name">Pengaturan Kelas</span>
                 </a>
                 <!-- Pengaturan Video -->
-                <a href="<?= site_url('/adminRoot/playlist/video_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "video_admin") ? "active" : "" ?>">
+                <a href="<?= site_url('/adminRoot/playlist/video_admin') ?>" class="nav_link <?= ($this->uri->segment(2) === "playlist") ? "active" : "" ?>">
                     <i class="bx bxs-playlist nav_icon"></i>
                     <span class="nav_name">Control Video</span>
                 </a>

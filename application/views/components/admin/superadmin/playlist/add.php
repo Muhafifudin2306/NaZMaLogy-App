@@ -10,7 +10,7 @@
                 <form method="post" action="<?= base_url('adminRoot/playlist/save_playlist') ?>">
                     <div class="mb-3">
                         <label class="form-label fw-bold" for="name">Nama Playlist<span class="text-danger">*</span></label>
-                        <input type="text" id="name" name="name" class="form-control <?php echo form_error('name') ? 'is-invalid' : ''; ?>" placeholder="Playlist xx">
+                        <input type="text" id="name" value="<?php echo set_value('name'); ?>" name="name" class="form-control <?php echo form_error('name') ? 'is-invalid' : ''; ?>" placeholder="Playlist xx" required>
                         <div id="name-error" class="invalid-feedback">
                             <?= form_error('name'); ?>
                         </div>

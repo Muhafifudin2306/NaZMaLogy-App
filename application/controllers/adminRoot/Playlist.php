@@ -149,31 +149,38 @@ class Playlist extends CI_Controller
             'id_role' => $this->session->userdata('id_role'),
             'playlists' => $this->PlaylistModel->get_data_playlist(),
         ];
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/video/add');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/superadmin/video/add', $data);
     }
     public function save_video()
     {
-        $link = $this->input->post('link');
-        $duration = $this->input->post('duration');
-        $id_playlist = $this->input->post('id_playlist');
-        $title = $this->input->post('title');
-        $data = array(
-            'link' => $link,
-            'duration' => $duration,
-            'id_playlist' => $id_playlist,
-            'title' => $title
-            // dan seterusnya
-        );
-        $insert_id = $this->PlaylistModel->insert_data_video($data);
-        if ($insert_id) {
-            $this->session->set_flashdata('success_add', 'email atau Password salah');
-            redirect('adminRoot/playlist/video_admin');
+        //load library form validation
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('link', 'Link Video', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('title', 'Judul Video', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('duration', 'Durasi', 'trim|required');
+        $this->form_validation->set_rules('id_playlist', 'id playlist', 'trim|required');
+        //jika validasi gagal
+        if ($this->form_validation->run() == false) {
+            $data['error'] = validation_errors();
+            $data['id_user'] = $this->session->userdata('id');
+            $data['id_role'] = $this->session->userdata('id_role');
+            $data['playlists'] = $this->PlaylistModel->get_data_playlist();
+            $this->load->view('pages/admin/superadmin/video/add', $data);
         } else {
-            $this->session->set_flashdata('error', 'input salah');
-            redirect('adminRoot/playlist/add_playlist');
+            $data = array(
+                'link' => $this->input->post('link'),
+                'duration' => $this->input->post('duration'),
+                'id_playlist' => $this->input->post('id_playlist'),
+                'title' => $this->input->post('title')
+            );
+            $insert_id = $this->PlaylistModel->insert_data_video($data);
+            if ($insert_id) {
+                $this->session->set_flashdata('success_add', 'email atau Password salah');
+                redirect('adminRoot/playlist/video_admin');
+            } else {
+                $this->session->set_flashdata('error', 'input salah');
+                redirect('adminRoot/playlist/add_playlist');
+            }
         }
     }
 
@@ -195,30 +202,37 @@ class Playlist extends CI_Controller
             'video' => $this->PlaylistModel->get_video_by_id($id),
             'playlists' => $this->PlaylistModel->get_data_playlist()
         ];
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/video/edit');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/superadmin/video/edit', $data);
     }
 
     public function update_video($id)
     {
-        // Validasi form di sini
-        // ...
-        $link = $this->input->post('link');
-        $duration = $this->input->post('duration');
-        $title = $this->input->post('title');
-        $id_playlist = $this->input->post('id_playlist');
-        $data = array(
-            'link' => $link,
-            'duration' => $duration,
-            'title' => $title,
-            'id_playlist' => $id_playlist,
-            'id' => $id
-        );
-        $this->PlaylistModel->updateVideo($data);
-        // Menampilkan pesan sukses dan redirect ke halaman lain
-        $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
-        redirect('userBranch/playlist/video_admin');
+        //load library form validation
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('link', 'Link Video', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('title', 'Judul Video', 'trim|required|min_length[5]');
+        $this->form_validation->set_rules('duration', 'Durasi', 'trim|required');
+        $this->form_validation->set_rules('id_playlist', 'id playlist', 'trim|required');
+        //jika validasi gagal
+        if ($this->form_validation->run() == false) {
+            $data['error'] = validation_errors();
+            $data['id_user'] = $this->session->userdata('id');
+            $data['id_role'] = $this->session->userdata('id_role');
+            $data['playlists'] = $this->PlaylistModel->get_data_playlist();
+            $data['video'] = $this->PlaylistModel->get_video_by_id($id);
+            $this->load->view('pages/admin/superadmin/video/edit', $data);
+        } else {
+            $data = array(
+                'link' => $this->input->post('link'),
+                'duration' => $this->input->post('duration'),
+                'id_playlist' => $this->input->post('id_playlist'),
+                'title' => $this->input->post('title'),
+                'id' => $id
+            );
+            $this->PlaylistModel->updateVideo($data);
+            // Menampilkan pesan sukses dan redirect ke halaman lain
+            $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
+            redirect('adminRoot/playlist/video_admin');
+        }
     }
 }

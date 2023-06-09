@@ -62,6 +62,7 @@ class PlaylistModel extends CI_Model
         $this->db->select('videos.*, playlists.id AS id_playlist, playlists.name AS playlist_name, ');
         $this->db->join('playlists', 'videos.id_playlist = playlists.id');
         $this->db->from('videos');
+        $this->db->order_by('created_at', 'desc');
         $query = $this->db->get();
         return $query->result();
     }

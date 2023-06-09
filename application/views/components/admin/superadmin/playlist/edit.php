@@ -2,7 +2,6 @@
     <div class="row pb-5">
         <div class="col-md-6">
             <div class="bg-white p-5 border" data-aos="zoom-in-up" data-aos-duration="700">
-                <!-- =============== Kelas Tersimpan ================= -->
                 <div class="d-flex justify-content-between py-2">
                     <h5 class="text-2">Edit Data Playlist</h5>
                     <a href="<?= base_url('adminRoot/playlist/video_admin') ?>"><i class="bi bi-x-lg text-black"></i></a>

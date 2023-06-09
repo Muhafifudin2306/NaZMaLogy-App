@@ -5,6 +5,7 @@
             <ul class="nav__list">
                 <?php
                 $activeSegment = $this->uri->segment(3);
+                $activePanel = $this->uri->segment(2);
                 $activeClass = ($activeSegment === "page") ? "active-link" : "";
                 $activeSetting = ($this->uri->segment(2) === "setting" || $this->uri->segment(3) === "edit_user") ? "active-link" : "";
                 ?>
@@ -33,7 +34,7 @@
                 </li>
                 <!-- Pengaturan Video -->
                 <?php
-                $activeClass = ($activeSegment === "video_admin") ? "active-link" : "";
+                $activeClass = ($activePanel === "playlist") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
                     <a href="<?= site_url('/adminRoot/playlist/video_admin') ?>" class="nav__link <?= $activeClass ?>">
