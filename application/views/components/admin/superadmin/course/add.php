@@ -23,10 +23,12 @@
                                 <label for="cover" class="form-label fw-bold">Cover Kursus
                                     <span class="text-danger">*</span>
                                 </label>
-                                <input type="file" name="cover" class="form-control" id="cover" placeholder="Judul Kursus Saya" required>
-                                <div id="name-error" class="invalid-feedback">
-                                    <?= form_error('cover'); ?>
-                                </div>
+                                <input type="file" name="cover" class="form-control <?= form_error('cover') ? 'is-invalid' : '' ?>" id="cover" required>
+                                <?php if (form_error('cover')) : ?>
+                                    <div class="invalid-feedback">
+                                        <?= form_error('cover'); ?>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                             <div class="mb-3">
                                 <label for="instructor" class="form-label fw-bold">Instruktur

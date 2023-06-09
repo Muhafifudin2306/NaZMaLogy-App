@@ -6,6 +6,8 @@ class Course extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        $this->load->model('AuthModel');
+        $this->load->model('UserModel');
         $this->load->model('CategoryModel');
         $this->load->model('CourseModel');
         $this->load->model('PlaylistModel');
@@ -147,79 +149,57 @@ class Course extends CI_Controller
         $config['allowed_types'] = '*';
         $config['max_size'] = 10000;
 
-        // Load library form validation
-        $this->load->library('form_validation');
+        //inisialisasi upload
+        $this->upload->initialize($config);
 
-        // Set rules for form validation
-        $this->form_validation->set_rules('title', 'Judul Kursus', 'trim|required|min_length[5]');
-        $this->form_validation->set_rules('cover', 'Cover Kursus', 'required');
-        $this->form_validation->set_rules('instructor', 'Instruktur', 'trim|required|min_length[5]');
-        $this->form_validation->set_rules('intro_link', 'Link Intro Kelas', 'trim|required|valid_url');
-        $this->form_validation->set_rules('intro_duration', 'Durasi (Menit)', 'trim|required|numeric');
-        // $this->form_validation->set_rules('mentoring_link', 'Link WA Mentoring', 'trim|required|valid_url');
-        $this->form_validation->set_rules('playlist[]', 'Playlist Kursus', 'required');
-        $this->form_validation->set_rules('category[]', 'Kategori Kursus', 'required');
-        $this->form_validation->set_rules('summary', 'Ringkasan Kursus', 'trim|required');
+        //jika gagal upload
+        if (!$this->upload->do_upload('cover')) {
+            $error = array('error' => $this->upload->display_errors());
+            redirect('adminRoot/course/class_admin', $error);
+        }
+        //jika berhasil upload
+        else {
+            $data = array(
+                'title' => $this->input->post('title', TRUE),
+                'summary' => $this->input->post('summary', TRUE),
+                'instructor' => $this->input->post('instructor', TRUE),
+                'intro_link' => $this->input->post('intro_link', TRUE),
+                'intro_duration' => $this->input->post('intro_duration', TRUE),
+                'mentoring_link' => $this->input->post('mentoring_link', TRUE),
+                'cover' => $this->upload->data('file_name')
+            );
 
-        //jika validasi gagal
-        if ($this->form_validation->run() == false) {
-            $data['error'] = validation_errors();
-            $data['id_user'] = $this->session->userdata('id');
-            $data['categories'] = $this->CategoryModel->get_data_category();
-            $data['playlist'] = $this->PlaylistModel->get_data_playlist();
-            $data['id_role'] = $this->session->userdata('id_role');
-            $this->load->view('pages/admin/superadmin/course/add', $data);
-        } else {
-            //jika gagal upload
-            if (!$this->upload->do_upload('cover')) {
-                $error = array('error' => $this->upload->display_errors());
-                redirect('userBranch/course/class_admin', $error);
-            }
-            //jika berhasil upload
-            else {
-                $data = array(
-                    'title' => $this->input->post('title', TRUE),
-                    'summary' => $this->input->post('summary', TRUE),
-                    'instructor' => $this->input->post('instructor', TRUE),
-                    'intro_link' => $this->input->post('intro_link', TRUE),
-                    'intro_duration' => $this->input->post('intro_duration', TRUE),
-                    'mentoring_link' => $this->input->post('mentoring_link', TRUE),
-                    'cover' => $this->upload->data('file_name')
+
+            if ($this->CourseModel->insert_data_course($data)) {
+                $this->session->set_flashdata(
+                    'success_add',
+                    'Success Add Project Data'
                 );
 
-
-                if ($this->CourseModel->insert_data_course($data)) {
-                    $this->session->set_flashdata(
-                        'success_add',
-                        'Success Add Project Data'
+                //menyimpan relasi antara kategori dan data
+                $id_data = $this->db->insert_id();
+                $category = $this->input->post('category');
+                foreach ($category as $row) {
+                    $data_category = array(
+                        'id_course' => $id_data,
+                        'id_category' => $row
                     );
-
-                    //menyimpan relasi antara kategori dan data
-                    $id_data = $this->db->insert_id();
-                    $category = $this->input->post('category');
-                    foreach ($category as $row) {
-                        $data_category = array(
-                            'id_course' => $id_data,
-                            'id_category' => $row
-                        );
-                        $this->CourseModel->save_category_relation($data_category);
-                    }
-
-                    $playlist = $this->input->post('playlist');
-                    foreach ($playlist as $row) {
-                        $data_playlist = array(
-                            'id_course' => $id_data,
-                            'id_playlist' => $row
-                        );
-                        $this->CourseModel->save_playlist_relation($data_playlist);
-                    }
-
-                    redirect('userBranch/course/class_admin');
+                    $this->CourseModel->save_category_relation($data_category);
                 }
+
+                $playlist = $this->input->post('playlist');
+                foreach ($playlist as $row) {
+                    $data_playlist = array(
+                        'id_course' => $id_data,
+                        'id_playlist' => $row
+                    );
+                    $this->CourseModel->save_playlist_relation($data_playlist);
+                }
+
+                redirect('adminRoot/course/class_admin');
             }
         }
     }
-
 
     public function edit_course($id)
     {
@@ -232,10 +212,7 @@ class Course extends CI_Controller
             'detail_category' => $this->CourseModel->get_category_by_id($id),
             'detail_playlist' => $this->CourseModel->get_playlist_by_id_course($id)
         ];
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/course/edit');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/superadmin/course/edit', $data);
     }
     public function update_course($id)
     {
@@ -276,6 +253,6 @@ class Course extends CI_Controller
         }
         $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
 
-        redirect('userBranch/course/class_admin');
+        redirect('adminRoot/course/class_admin');
     }
 }

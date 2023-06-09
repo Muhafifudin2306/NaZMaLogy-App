@@ -99,7 +99,7 @@ if ($this->session->flashdata('success_add') != '') {
                         </td>
                         <td width="20%">
                             <div class="d-flex gap-2 justify-content-center">
-                                <?php echo anchor('userBranch/course/edit_course/' . $data->id, "<button class='btn btn-primary bg-first'>Edit</button>"); ?>
+                                <?php echo anchor('adminRoot/course/edit_course/' . $data->id, "<button class='btn btn-primary btn-blue-1 fs-7'><i class='bi bi-pen fs-7'></i></button>"); ?>
                                 <button onclick="courseDeleteConfirmation(<?php echo $data->id; ?>)" class="btn btn-danger btn-orange-1 text-white fs-7">
                                     <span class='text-white'><i class='bi bi-trash3-fill fs-7'></i></span>
                                 </button>
