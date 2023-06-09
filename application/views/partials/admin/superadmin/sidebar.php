@@ -17,8 +17,8 @@
                     <span class="nav_name">Pengaturan Akses</span>
                 </a>
                 <!-- Pengaturan Kelas -->
-                <a href="<?= site_url('/adminRoot/course/class_admin') ?>" class="nav_link <?= ($this->uri->segment(3) === "class_admin") ? "active" : "" ?>">
-                    <i class="bx bx<?= ($this->uri->segment(3) === "class_admin") ? "s" : "" ?>-book-alt nav_icon"></i>
+                <a href="<?= site_url('/adminRoot/course/class_admin') ?>" class="nav_link <?= ($this->uri->segment(2) === "course") ? "active" : "" ?>">
+                    <i class="bx bx<?= ($this->uri->segment(2) === "course") ? "s" : "" ?>-book-alt nav_icon"></i>
                     <span class="nav_name">Pengaturan Kelas</span>
                 </a>
                 <!-- Pengaturan Video -->

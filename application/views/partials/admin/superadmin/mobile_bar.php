@@ -25,11 +25,11 @@
                 </li>
                 <!-- Pengaturan Kelas -->
                 <?php
-                $activeClass = ($activeSegment === "class_admin") ? "active-link" : "";
+                $activeClass = ($activePanel === "course") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
                     <a href="<?= site_url('/userBranch/course/class_admin') ?>" class="nav__link <?= $activeClass ?>">
-                        <i class="bx bx<?= ($activeSegment === "class_admin") ? "s" : "" ?>-book-alt nav__icon"></i>
+                        <i class="bx bx<?= ($activePanel === "class_admin") ? "s" : "" ?>-book-alt nav__icon"></i>
                     </a>
                 </li>
                 <!-- Pengaturan Video -->
@@ -42,7 +42,6 @@
                     </a>
                 </li>
             </ul>
-
         </div>
     </nav>
 </header>

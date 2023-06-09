@@ -69,28 +69,29 @@ class Setting extends CI_Controller
 
     public function save_testimony()
     {
-        //load library upload
+        // Load library upload
         $this->load->library('upload');
 
-        //konfigurasi upload
+        // Konfigurasi upload
         $config['upload_path'] = './assets/images/admin/testimony/';
         $config['allowed_types'] = '*';
         $config['max_size'] = 10000;
 
-        //inisialisasi upload
+        // Inisialisasi upload
         $this->upload->initialize($config);
 
-        //load library form validation
+        // Load library form validation
         $this->load->library('form_validation');
 
-        //set rules validation
+        // Set rules validation
         $this->form_validation->set_rules('author', 'Author', 'trim|required|min_length[5]');
         $this->form_validation->set_rules('message', 'Message', 'trim|required|min_length[5]');
         $this->form_validation->set_rules('job', 'Job', 'trim|required|min_length[5]');
-        $this->form_validation->set_rules('rating', 'Rating', 'trim|required');
-        $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('rating', 'Rating', 'required');
+        $this->form_validation->set_rules('status', 'Status', 'required');
+        $this->form_validation->set_rules('image', 'Image', 'callback_validate_image');
 
-        //jika validasi gagal
+        // If validation fails
         if ($this->form_validation->run() == false) {
             $data['error'] = validation_errors();
             $data = [
@@ -99,9 +100,9 @@ class Setting extends CI_Controller
             ];
             $this->load->view('pages/admin/superadmin/testimony/add', $data);
         }
-        //jika validasi berhasil
+        // If validation succeeds
         else {
-            //jika gagal upload
+            // If upload fails
             if (!$this->upload->do_upload('image')) {
                 $data['error'] = $this->upload->display_errors();
                 $data = [
@@ -110,7 +111,7 @@ class Setting extends CI_Controller
                 ];
                 $this->load->view('pages/admin/superadmin/testimony/add', $data);
             }
-            //jika berhasil upload
+            // If upload succeeds
             else {
                 $data = array(
                     'author' => $this->input->post('author', TRUE),
@@ -129,6 +130,16 @@ class Setting extends CI_Controller
         }
     }
 
+    // Custom callback function to validate image upload
+    public function validate_image($image)
+    {
+        if (empty($_FILES['image']['name'])) {
+            $this->form_validation->set_message('validate_image', 'The {field} field is required.');
+            return false;
+        }
+        return true;
+    }
+
     function edit_testimony($id)
     {
         $where = array('id' => $id);
@@ -140,7 +151,7 @@ class Setting extends CI_Controller
         $this->load->view('pages/admin/superadmin/testimony/edit', $data);
     }
 
-    public function update_testimony($id)
+    public function update_testimony($code)
     {
         // Validasi input
         $this->form_validation->set_rules('author', 'Nama Pengguna', 'trim|required|min_length[5]');
@@ -150,31 +161,28 @@ class Setting extends CI_Controller
         $this->form_validation->set_rules('rating', 'Rating', 'trim|required');
 
         // Cek validasi
-        //jika validasi gagal
         if ($this->form_validation->run() == false) {
             $data['error'] = validation_errors();
             $data = [
                 'id_role' => $this->session->userdata('id_role'),
                 'id_user' => $this->session->userdata('id'),
-                'testimony' => $this->UserModel->get_testimony_by_id($id)
+                'testimony' => $this->UserModel->get_testimony_by_code($code) // Ubah ke fungsi getModelByCode() yang sesuai dengan implementasi Anda
             ];
             $this->load->view('pages/admin/superadmin/testimony/edit', $data);
         } else {
             // Validasi berhasil, lakukan pembaruan data
-
             $data = array(
                 'author' => $this->input->post('author', TRUE),
                 'status' => $this->input->post('status', TRUE),
                 'message' => $this->input->post('message', TRUE),
                 'job' => $this->input->post('job', TRUE),
                 'rating' => $this->input->post('rating', TRUE),
-                'id' => $id
+                'code' => $code // Gunakan code unik atau ID testimoni yang diambil dari URL
             );
 
-            $this->UserModel->updateTestimony($id, $data);
+            $this->UserModel->updateTestimonyByCode($code, $data); // Ubah ke fungsi updateModelByCode() yang sesuai dengan implementasi Anda
 
             $this->session->set_flashdata('success_update', 'Data berhasil diupdate');
-
             redirect('adminRoot/setting');
         }
     }

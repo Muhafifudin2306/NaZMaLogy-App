@@ -8,6 +8,7 @@ class CategoryModel extends CI_Model
     }
     public function get_data_category()
     {
+        $this->db->order_by('created_at', 'desc');
         $query = $this->db->get('categories');
         return $query->result();
     }

@@ -11,10 +11,7 @@
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/node_modules/datatables.net-dt/css/jquery.dataTables.css'); ?>">
-    <script src="<?php echo base_url('assets/node_modules/datatables.net-dt/js/jquery.dataTables.js'); ?>"></script>
-
-
-
+    <script src="<?php echo base_url('assets/node_modules/datatables.net/js/jquery.dataTables.js'); ?>"></script>
 </head>
 
 <body id="body-pd">
@@ -32,7 +29,6 @@
 
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
-    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var copyButtons = document.querySelectorAll('.copy-email');

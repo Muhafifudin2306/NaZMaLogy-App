@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title> Pengaturan Video | NaZMaLogy </title>
+    <title> Pengaturan Kursus | NaZMaLogy </title>
 
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/admin/general/style.php'); ?>
@@ -23,7 +23,7 @@
     <!-- Header -->
 
     <!-- Content -->
-    <?php include(APPPATH . 'views/components/admin/superadmin/playlist/index.php'); ?>
+    <?php include(APPPATH . 'views/components/admin/superadmin/course/index.php'); ?>
     <!-- Content -->
 
     <!-- Footer -->
@@ -33,7 +33,7 @@
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>
     <script>
-        function videoDeleteConfirmation(id) {
+        function categoryDeleteConfirmation(id) {
             Swal.fire({
                 title: '<h3 class="fw-bold text-black">Konfirmasi</h3>',
                 text: 'Apakah Anda yakin ingin menghapus data ini?',
@@ -46,7 +46,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect ke fungsi delete_testimony dengan ID sebagai parameter
-                    window.location = '<?php echo site_url('adminRoot/playlist/delete_video/'); ?>' + id;
+                    window.location = '<?php echo site_url('adminRoot/course/delete_category/'); ?>' + id;
                 }
             });
         }
@@ -54,7 +54,7 @@
 
 
     <script>
-        function playlistDeleteConfirmation(id) {
+        function courseDeleteConfirmation(id) {
             Swal.fire({
                 title: '<h3 class="fw-bold text-black">Konfirmasi</h3>',
                 text: 'Apakah Anda yakin ingin menghapus data ini?',
@@ -67,7 +67,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     // Redirect ke fungsi delete_testimony dengan ID sebagai parameter
-                    window.location = '<?php echo site_url('adminRoot/playlist/delete_playlist/'); ?>' + id;
+                    window.location = '<?php echo site_url('adminRoot/course/delete_course/'); ?>' + id;
                 }
             });
         }
