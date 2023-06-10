@@ -294,10 +294,9 @@ class UserModel extends CI_Model
         $job = $data['job'];
         $instagram = $data['instagram'];
         $linkedin = $data['linkedin'];
-        $this->db->where('id', $id);
+        $this->db->where('id_user', $id);
         $member = $this->db->get('members')->row();
         $image = $member->image;
-
 
         $config['upload_path'] = './assets/images/profile/';
         $config['allowed_types'] = '*';
@@ -307,7 +306,6 @@ class UserModel extends CI_Model
         $this->load->library('upload', $config);
         //konfigurasi upload
         if ($this->upload->do_upload('image')) {
-
             $data = array(
                 'summary' => $summary,
                 'job' => $job,
@@ -324,11 +322,11 @@ class UserModel extends CI_Model
                 'job' => $job,
                 'instagram' => $instagram,
                 'linkedin' => $linkedin,
-                'image' => '12_52923_image.png'
+                'image' => $image
             );
-            $this->db->where('id_user', $id);
-            $this->db->update('members', $data);
         }
+        $this->db->where('id_user', $id);
+        $this->db->update('members', $data);
     }
 
 

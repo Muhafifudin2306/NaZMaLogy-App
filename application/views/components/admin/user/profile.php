@@ -133,11 +133,11 @@ if ($this->session->flashdata('success_update') != '') {
                                             <textarea rows="5" class="form-control" name="summary" placeholder="Ringkasan Diri Anda" id="floatingTextareaDisabled"></textarea>
                                         </div>
                                         <div class="mb-2 p-2 px-4">
-                                            <label for="disabledTextInput" class="form-label">Akun Instagram</label>
+                                            <label for="disabledTextInput" class="form-label">Akun Instagram (link)</label>
                                             <input type="text" name="instagram" class="form-control" placeholder="@instagramsaya">
                                         </div>
                                         <div class="mb-2 p-2 px-4">
-                                            <label for="disabledTextInput" class="form-label">Akun Linked In</label>
+                                            <label for="disabledTextInput" class="form-label">Akun LinkedIn (link)</label>
                                             <input type="text" name="linkedin" class="form-control" placeholder="Linked-In-Saya">
                                         </div>
                                         <div class="px-4">
@@ -153,7 +153,7 @@ if ($this->session->flashdata('success_update') != '') {
 
                                         <div class="mb-2 p-2 px-4">
                                             <label for="image" class="form-label">Foto : <a target="_blank" href="<?= base_url('assets/images/profile/' . $member->image) ?>">Lihat File Foto</a> </label>
-                                            <input class="form-control" type="file" id="image" name="image" accept="image/*">
+                                            <input class="form-control" type="file" id="image" value="<?= $member->image ?>" name="image" accept="image/*">
                                         </div>
                                         <div class="mb-2 p-2 px-4">
                                             <label for="disabledTextInput" class="form-label">Nama Lengkap</label>
@@ -169,11 +169,11 @@ if ($this->session->flashdata('success_update') != '') {
                                             <textarea rows="5" class="form-control" name="summary" id="floatingTextareaDisabled"><?= $member->summary ?></textarea>
                                         </div>
                                         <div class="mb-2 p-2 px-4">
-                                            <label for="disabledTextInput" class="form-label">Akun Instagram</label>
+                                            <label for="disabledTextInput" class="form-label">Akun Instagram (link)</label>
                                             <input type="text" name="instagram" class="form-control" value="<?= $member->instagram ?>">
                                         </div>
                                         <div class="mb-2 p-2 px-4">
-                                            <label for="disabledTextInput" class="form-label">Akun Linked In</label>
+                                            <label for="disabledTextInput" class="form-label">Akun LinkedIn (link)</label>
                                             <input type="text" name="linkedin" class="form-control" value="<?= $member->linkedin ?>">
                                         </div>
                                         <div class="px-4">
