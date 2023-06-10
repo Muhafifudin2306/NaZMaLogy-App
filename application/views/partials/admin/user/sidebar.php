@@ -9,6 +9,7 @@
             <div class="nav_list">
                 <?php
                 $activeSegment = $this->uri->segment(3);
+                $activePanel = $this->uri->segment(2);
                 ?>
                 <!-- Dashbaord -->
                 <a href="<?= site_url('/userBranch/user/page') ?>" class="nav_link <?= ($activeSegment === "page") ? "active" : "" ?>">
@@ -30,10 +31,10 @@
                 </a>
                 <!-- Pengaturan Profil -->
                 <?php
-                $activeClass = ($activeSegment === "profile") ? "active" : "";
+                $activeClass = ($activePanel === "profile") ? "active" : "";
                 ?>
-                <a href="<?= site_url('/userBranch/user/profile') ?>" class="nav_link <?= $activeClass ?>">
-                    <i class="bx bx<?= ($activeSegment === "profile") ? "s" : "" ?>-user nav_icon"></i>
+                <a href="<?= site_url('/userBranch/profile') ?>" class="nav_link <?= $activeClass ?>">
+                    <i class="bx bx<?= ($activePanel === "profile") ? "s" : "" ?>-user nav_icon"></i>
                     <span class="nav_name">Akun Saya</span>
                 </a>
             </div>

@@ -26,6 +26,14 @@ class UserModel extends CI_Model
         return $this->db->get('users')->result_array();
     }
 
+    public function get_data_user_by_id($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('users');
+
+        return $query->row(); // mengembalikan sebuah objek hasil query
+    }
+
     public function insert_data_course($data)
     {
         return $this->db->insert('user_has_course', $data);
@@ -104,6 +112,28 @@ class UserModel extends CI_Model
         $this->db->update('users', $data);
     }
 
+    public function update_email_from_profile($data, $id)
+    {
+        $email = $data['email'];
+
+        $data = array(
+            'email' => $email
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('users', $data);
+    }
+    public function update_name_from_profile($data, $id)
+    {
+        $name = $data['name'];
+
+        $data = array(
+            'name' => $name
+        );
+
+        $this->db->where('id', $id);
+        $this->db->update('users', $data);
+    }
     public function getUserVideoStatus($id_user, $id_video)
     {
         // Perform database query to check user-video relationship
@@ -228,7 +258,7 @@ class UserModel extends CI_Model
 
             );
             $this->db->where('id', $id);
-            $this->db->update('courses', $data);
+            $this->db->update('testimonies', $data);
         } else {
             $data = array(
                 'author' => $author,
@@ -260,85 +290,45 @@ class UserModel extends CI_Model
 
     public function updateProfile($id, $data)
     {
-        $name = $data['name'];
-        $job = $data['job'];
         $summary = $data['summary'];
+        $job = $data['job'];
         $instagram = $data['instagram'];
         $linkedin = $data['linkedin'];
-        $email = $data['email'];
-        $id = $data['id_user'];
-        $this->db->where('id_user', $id);
-        $profile = $this->db->get('members')->row();
-        $image = $profile->image;
+        $this->db->where('id', $id);
+        $member = $this->db->get('members')->row();
+        $image = $member->image;
 
-        if ($_FILES['image']['tmp_name']) {
-            $config['upload_path'] = './assets/images/profile/';
 
-            $config['allowed_types'] = '*';
-            $config['max_size'] = 10000;
+        $config['upload_path'] = './assets/images/profile/';
+        $config['allowed_types'] = '*';
+        $config['max_size'] = 10000;
 
-            $this->load->library('upload', $config);
-            if ($this->upload->do_upload('image')) {
-                $uploadedData = $this->upload->data();
-                $uploadedImage = $uploadedData['full_path'];
 
-                // Load library image manipulation
-                $this->load->library('image_lib');
+        $this->load->library('upload', $config);
+        //konfigurasi upload
+        if ($this->upload->do_upload('image')) {
 
-                // Crop configuration
-                $cropConfig = array(
-                    'image_library' => 'gd2',
-                    'source_image' => $uploadedImage,
-                    'new_image' => './assets/images/profile/cropped/',
-                    'maintain_ratio' => FALSE,
-                    'width' => $this->input->post('w'),
-                    'height' => $this->input->post('h'),
-                    'x_axis' => $this->input->post('x'),
-                    'y_axis' => $this->input->post('y')
-                );
+            $data = array(
+                'summary' => $summary,
+                'job' => $job,
+                'linkedin' => $linkedin,
+                'instagram' => $instagram,
+                'image' => $this->upload->data('file_name')
 
-                // Initialize crop library
-                $this->image_lib->initialize($cropConfig);
-
-                // Perform crop
-                if ($this->image_lib->crop()) {
-                    $data['image'] = $uploadedData['file_name'];
-                    $data['crop_x'] = $this->input->post('x');
-                    $data['crop_y'] = $this->input->post('y');
-                    $data['crop_width'] = $this->input->post('w');
-                    $data['crop_height'] = $this->input->post('h');
-
-                    // Delete original image
-                    $path = './assets/images/profile/' . $image;
-                    if (file_exists($path)) {
-                        unlink($path); // Menghapus gambar asli jika ada
-                    }
-                } else {
-                    // Crop failed
-                    echo $this->image_lib->display_errors();
-                }
-
-                // Clear crop library settings
-                $this->image_lib->clear();
-            } else {
-                // Upload failed
-                echo $this->upload->display_errors();
-                $data['image'] = $image;
-                $data['crop_x'] = NULL;
-                $data['crop_y'] = NULL;
-                $data['crop_width'] = NULL;
-                $data['crop_height'] = NULL;
-            }
+            );
+            $this->db->where('id_user', $id);
+            $this->db->update('members', $data);
         } else {
-            $data['image'] = $image;
-            $data['crop_x'] = NULL;
-            $data['crop_y'] = NULL;
-            $data['crop_width'] = NULL;
-            $data['crop_height'] = NULL;
+            $data = array(
+                'summary' => $summary,
+                'job' => $job,
+                'instagram' => $instagram,
+                'linkedin' => $linkedin,
+                'image' => '12_52923_image.png'
+            );
+            $this->db->where('id_user', $id);
+            $this->db->update('members', $data);
         }
-
-        $this->db->where('id_user', $id);
-        $this->db->update('members', $data);
     }
 
 
@@ -347,8 +337,6 @@ class UserModel extends CI_Model
 
     public function updateAddress($id, $data)
     {
-
-        $email = $data['email'];
         $address = $data['address'];
         $district = $data['district'];
         $region = $data['region'];
@@ -356,10 +344,8 @@ class UserModel extends CI_Model
         $posCode = $data['posCode'];
         $id = $data['id_user'];
         $this->db->where('id_user', $id);
-        $profile = $this->db->get('members')->row();
 
         $data = array(
-            'email' => $email,
             'address' => $address,
             'district' => $district,
             'region' => $region,

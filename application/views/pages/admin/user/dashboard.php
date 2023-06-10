@@ -26,9 +26,6 @@
     <?php include(APPPATH . 'views/components/admin/user/dashboard.php'); ?>
     <!-- Content -->
 
-    <!-- Footer -->
-    <?php include(APPPATH . 'views/layout/admin/footer.php'); ?>
-    <!-- Footer -->
 
     <!-- Script -->
     <?php include(APPPATH . 'views/partials/admin/general/script.php'); ?>

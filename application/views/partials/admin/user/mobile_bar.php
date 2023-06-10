@@ -20,8 +20,8 @@
                     </a>
                 </li>
                 <li class="nav__item">
-                    <a href="<?= site_url('/userBranch/user/profile') ?>" class="nav__link <?= ($this->uri->segment(3) === "profile") ? "active-link" : "" ?>">
-                        <i class='bx bx<?= ($this->uri->segment(3) === "profile") ? "s" : "" ?>-user nav__icon'></i>
+                    <a href="<?= site_url('/userBranch/profile') ?>" class="nav__link <?= ($this->uri->segment(2) === "profile") ? "active-link" : "" ?>">
+                        <i class='bx bx<?= ($this->uri->segment(2) === "profile") ? "s" : "" ?>-user nav__icon'></i>
                     </a>
                 </li>
             </ul>

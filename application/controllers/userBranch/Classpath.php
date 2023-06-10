@@ -97,10 +97,7 @@ class Classpath extends CI_Controller
             }
         }
 
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/course_list', $data);
     }
 
     public function listClassAZ()
@@ -122,10 +119,7 @@ class Classpath extends CI_Controller
                 $class->button_label = '+ Ikuti Kelas';
             }
         }
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/course_list', $data);
     }
 
     public function listClassZA()
@@ -146,10 +140,7 @@ class Classpath extends CI_Controller
                 $class->button_label = '+ Ikuti Kelas';
             }
         }
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/course_list', $data);
     }
 
 
@@ -225,10 +216,7 @@ class Classpath extends CI_Controller
             }
         }
 
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/course_list', $data);
     }
     public function classSearch()
     {
@@ -274,10 +262,7 @@ class Classpath extends CI_Controller
         }
 
 
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/listClass');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/course_list', $data);
     }
 
     public function save_course()

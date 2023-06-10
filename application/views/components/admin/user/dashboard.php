@@ -107,5 +107,10 @@
                 </section>
             <?php endif; ?>
         </div>
+
+        <!-- Footer -->
+        <?php include(APPPATH . 'views/layout/admin/footer.php'); ?>
+        <!-- Footer -->
+
     <?php endif; ?>
 </div>

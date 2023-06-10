@@ -28,7 +28,7 @@
                 $activeClass = ($activePanel === "course") ? "active-link" : "";
                 ?>
                 <li class="nav__item">
-                    <a href="<?= site_url('/userBranch/course/class_admin') ?>" class="nav__link <?= $activeClass ?>">
+                    <a href="<?= site_url('/adminRoot/course/class_admin') ?>" class="nav__link <?= $activeClass ?>">
                         <i class="bx bx<?= ($activePanel === "class_admin") ? "s" : "" ?>-book-alt nav__icon"></i>
                     </a>
                 </li>
