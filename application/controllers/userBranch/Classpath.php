@@ -70,10 +70,7 @@ class Classpath extends CI_Controller
             }
         }
 
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/detailedCourse');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/detail_course', $data);
     }
 
 
