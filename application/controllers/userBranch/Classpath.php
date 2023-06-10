@@ -167,11 +167,7 @@ class Classpath extends CI_Controller
                 $video->status = $this->UserModel->getUserVideoStatus($this->session->userdata('id'), $video->id);
             }
         }
-
-        $this->load->view('admin/user/style');
-        $this->load->view('admin/user/menubar', $data);
-        $this->load->view('admin/user/detailedCourseId');
-        $this->load->view('admin/user/script');
+        $this->load->view('pages/admin/user/detail_video', $data);
     }
 
     public function filter_by_category()

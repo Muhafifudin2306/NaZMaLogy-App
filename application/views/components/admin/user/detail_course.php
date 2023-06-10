@@ -71,7 +71,7 @@ if ($this->session->flashdata('success') != '') {
                             <button id="speedDownButton" class="btn btn-primary btn-blue-1" title="mundur 5 detik">
                                 <i class="bi bi-skip-start-fill"></i>
                             </button>
-                            <button id="playPauseButton" onclick="togglePlayPause()" class="btn btn-warning btn-orange-1 text-black" title="Play/Stop">
+                            <button id="playPauseButton" onclick="togglePlayPause()" class="btn btn-warning btn-orange-1" title="Play/Stop">
                                 <i class="bi bi-play-fill"></i>
                             </button>
                             <button id="speedUpButton" class="btn btn-primary btn-blue-1" title="maju 5 detik">
@@ -88,16 +88,16 @@ if ($this->session->flashdata('success') != '') {
 
                 <div class="d-flex gap-3 flex-wrap tab-hover">
                     <div id="detail1" class="p-3 tab-up" onclick="openCity('detail')" style="border-bottom:  2px solid #2c2f75;">
-                        <span class="fw-bold">Pengantar</span>
+                        <span class="text-2">Pengantar</span>
                     </div>
                     <?php if ($has_relation) : ?>
                         <div id="profil1" class="p-3 tab-up" onclick="openCity('profil')">
-                            <span class="fw-bold">Feedback</span>
+                            <span class="text-2">Feedback</span>
                         </div>
                     <?php endif ?>
                     <?php if ($progress == 100) : ?>
                         <div id="mentoring1" class="p-3 tab-up" onclick="openCity('mentoring')">
-                            <span class="fw-bold">Gabung Mentoring</span>
+                            <span class="text-2">Sertifikat</span>
                         </div>
                     <?php endif ?>
                 </div>
@@ -139,8 +139,19 @@ if ($this->session->flashdata('success') != '') {
                     <?php endif ?>
                 </div>
                 <div id="mentoring" class="city bg-white p-3" style="display:none">
-                    <h6>Gabung Mentoring Melalui Link di Bawah ini : </h6>
-                    <a href="<?= $course->mentoring_link ?>" class="text-decoration-underline" target="_blank"><?= $course->mentoring_link ?></a>
+                    <div class="list-course pt-1">
+                        <div class="bg-white rounded d-flex gap-2 p-3 border">
+                            <div class="course-progress w-100 d-flex justify-content-between block-center">
+                                <div class=" icon-progress icon-center">
+                                    <i class="text-center bi bi-file-earmark-medical fs-4 text-blue-1"></i>
+                                    <a href="<?= site_url('userBranch/classpath/detail_course/' . $course->id)  ?>" class="video-ready text-blue-1 fw-bold fs-7 mx-2">Sertifikat Penyelesaikan Kelas <?= $course->title ?></a>
+                                </div>
+                                <div class="time-course w-15">
+                                    <i class="bi bi-arrow-down-circle text-blue-1 fs-4 fw-bold"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- 2 -->
@@ -193,7 +204,7 @@ if ($this->session->flashdata('success') != '') {
                 <?php else : ?>
                     <div class="row">
                         <div class="col-md-12">
-                            <h6 class="fw-bold mb-4">Perkembangan Belajar Anda</h6>
+                            <h6 class="text-2 mb-4">Perkembangan Belajar Anda</h6>
                             <div class="progress orange">
                                 <?php
                                 $width = $progress > 100 ? 100 : (int)($progress / 10) * 10; // Menghitung lebar progress bar
@@ -263,10 +274,8 @@ if ($this->session->flashdata('success') != '') {
                                             <?php else : ?>
                                                 <a href="<?= site_url('userBranch/classpath/detail_video_course/' . $course->id . "/" . $video->id)  ?>" class="video-ready text-orange-1 fs-7 fw-bold"><?= $video->title  ?></a>
                                             <?php endif ?>
-
                                         </div>
                                     </div>
-
                                     <div class="time-course fw-bold fs-7 d-flex justify-content-end">
                                         <?php if ($video->status == 1) : ?>
                                             <i class="bi bi-check-all text-success fs-4 fw-bold"></i>
@@ -292,31 +301,3 @@ if ($this->session->flashdata('success') != '') {
         <input type="text" name="status" value="1">
     </form>
 <?php endif ?>
-
-<!-- Modal -->
-<div class="modal fade" id="FeedbackModal" tabindex="-1" aria-labelledby="FeedbackModal" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title text-2 fs-5" id="exampleModalLabel">Edit Feedback</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form action="<?= site_url('userBranch/classpath/save_feedback') ?>" method="post">
-                    <input type="text" name="id_user" value="<?php echo $id_user ?>" hidden>
-                    <input type="text" name="id_course" value="<?php echo $course->id ?>" hidden>
-                    <div class="mb-3 p-2">
-                        <label for="rating" class="text-lg fw-bold form-label">Berikan Rating</label>
-
-                        <input name="rating" class="rating my-3 fs-6" max="5" oninput="this.style.setProperty('--value', `${this.valueAsNumber}`)" step="0.5" style="--value:<?php echo $feedback->rating ?>" value="<?php echo $feedback->rating ?>" type="range" value="0">
-                    </div>
-                    <div class="mb-3 p-2">
-                        <label for="feedback" class="text-lg fw-bold form-label">Berikan Masukan dan Saran</label>
-                        <textarea rows="4" name="feedback" class="form-control" placeholder="Leave a comment here"><?php echo $feedback->feedback ?></textarea>
-                    </div>
-                    <button class="btn btn-primary btn-blue-1 w-100 fs-7 fw-bold"> Kirim Feedback</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
