@@ -57,14 +57,87 @@ if ($this->session->flashdata('success_add') != '') {
 ?>
 
 <div class="space-top">
+
+    <div class="py-3" data-aos="fade-up" data-aos-duration="700">
+        <h5 class="text-2">Progress Siswa</h5>
+    </div>
+    <div class="bg-white p-5 border" data-aos="fade-up" data-aos-duration="700">
+
+        <table id="example3" class="table display">
+            <thead>
+                <tr">
+                    <th class="text-center" scope="col">No</th>
+                    <th class="text-center" scope="col">Judul Kursus</th>
+                    <th class="text-center" scope="col">Pengajar</th>
+                    <th class="text-center" scope="col">Nama Siswa</th>
+                    <th class="text-center" scope="col">Progress</th>
+                    <th class="text-center" scope="col">Rating User</th>
+                    <th class="text-center" scope="col">Feedback User</th>
+                    </tr>
+            </thead>
+
+            <tbody>
+
+                <?php
+                $no = 1;
+                foreach ($user_has_course as $data) { ?>
+                    <tr>
+                        <td class="text-center"><?= $no++ ?></td>
+                        <td><?= $data->course_name ?></td>
+                        <td><?= $data->instructor_name ?></td>
+                        <td><?= $data->user_name ?></td>
+                        <td class="text-center fw-bold text-blue-1 fs-7"><?= round($data->progress) . '%' ?></td>
+                        <td class="text-center text-orange-2 fs-7 fw-bold"><i class="bi bi-star-fill"></i> <?= round($data->rating) ?></td>
+                        <td width="25%"><?= $data->feedback ?></td>
+                    </tr>
+                <?php } ?>
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pb-3 py-5" data-aos="fade-up" data-aos-duration="700">
+        <h5 class="text-2">Data Siswa</h5>
+    </div>
+    <div class="bg-white p-5 border" data-aos="fade-up" data-aos-duration="700">
+
+        <table id="example4" class="table display">
+            <thead>
+                <tr">
+                    <th class="text-center" scope="col">No</th>
+                    <th class="text-center" scope="col">Nama User</th>
+                    <th class="text-center" scope="col">Pekerjaan</th>
+                    <th class="text-center" scope="col">Ringkasan</th>
+                    <th class="text-center" scope="col">Alamat</th>
+                    </tr>
+            </thead>
+
+            <tbody>
+
+                <?php
+                $no = 1;
+                foreach ($member as $data) { ?>
+                    <tr>
+                        <td class="text-center"><?= $no++ ?></td>
+                        <td><?= $data->user_name ?></td>
+                        <td class="text-center"><?= $data->job ?></td>
+                        <td width="25%"><?= $data->summary ?></td>
+                        <td width="25%"><?= $data->address ?></td>
+                    </tr>
+                <?php } ?>
+
+
+            </tbody>
+        </table>
+    </div>
+
     <div class="mt-5 mb-1 p-2 d-flex justify-content-between" data-aos="fade-up" data-aos-duration="700">
         <h5 class="text-2">Data Kursus</h5>
         <a href="<?= site_url('adminRoot/course/add_course') ?>"><button class="btn btn-success fs-7 fw-bold">+ Tambah </button></a>
-
     </div>
 
     <div class="bg-white p-5 border" data-aos="fade-up" data-aos-duration="700">
-
         <table id="example" class="table display">
             <thead>
                 <tr">
@@ -75,9 +148,7 @@ if ($this->session->flashdata('success_add') != '') {
                     <th class="text-center" scope="col">Aksi</th>
                     </tr>
             </thead>
-
             <tbody>
-
                 <?php
                 $no = 1;
                 foreach ($course as $data) { ?>
@@ -95,11 +166,11 @@ if ($this->session->flashdata('success_add') != '') {
                                 }
                                 ?>
                             </div>
-
                         </td>
                         <td width="20%">
                             <div class="d-flex gap-2 justify-content-center">
                                 <?php echo anchor('adminRoot/course/edit_course/' . $data->id, "<button class='btn btn-primary btn-blue-1 fs-7'><i class='bi bi-pen fs-7'></i></button>"); ?>
+                                <?php echo anchor('adminRoot/course/detail_course/' . $data->id, "<button class='btn btn-primary btn-orange-2 fs-7'><i class='bi bi-eye-fill fs-7'></i></button>"); ?>
                                 <button onclick="courseDeleteConfirmation(<?php echo $data->id; ?>)" class="btn btn-danger btn-orange-1 text-white fs-7">
                                     <span class='text-white'><i class='bi bi-trash3-fill fs-7'></i></span>
                                 </button>
@@ -107,8 +178,6 @@ if ($this->session->flashdata('success_add') != '') {
                         </td>
                     </tr>
                 <?php } ?>
-
-
             </tbody>
         </table>
     </div>

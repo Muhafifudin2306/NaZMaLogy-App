@@ -135,12 +135,16 @@ if ($this->session->flashdata('success') != '') {
                     <?php endif ?>
                 </div>
                 <div id="mentoring" class="city bg-white p-3" style="display:none">
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/pdfmake.min.js"></script>
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.68/vfs_fonts.js"></script>
                     <div class="list-course pt-1">
-                        <div class="bg-white rounded d-flex gap-2 p-3 border">
+                        <div class="bg-white rounded d-flex gap-2 p-3 border tab-hover" id="printButton">
                             <div class="course-progress w-100 d-flex justify-content-between block-center">
                                 <div class=" icon-progress icon-center">
                                     <i class="text-center bi bi-file-earmark-medical fs-4 text-blue-1"></i>
-                                    <a href="<?= site_url('userBranch/classpath/detail_course/' . $course->id)  ?>" class="video-ready text-blue-1 fw-bold fs-7 mx-2">Sertifikat Penyelesaikan Kelas <?= $course->title ?></a>
+
+                                    <span class="text-blue-1 fw-bold fs-7 mx-2"> Sertifikat Penyelesaikan Kursus <?= $course->title ?></span>
+
                                 </div>
                                 <div class="time-course w-15">
                                     <i class="bi bi-arrow-down-circle text-blue-1 fs-4 fw-bold"></i>
@@ -148,6 +152,65 @@ if ($this->session->flashdata('success') != '') {
                             </div>
                         </div>
                     </div>
+                    <script>
+                        // Menambahkan event listener ke tombol cetak
+                        document.getElementById('printButton').addEventListener('click', function() {
+                            // Mengambil gambar dari URL dan mengubahnya menjadi data URL
+                            function getBase64Image(url, callback) {
+                                var img = new Image();
+                                img.crossOrigin = 'Anonymous';
+                                img.onload = function() {
+                                    var canvas = document.createElement('canvas');
+                                    canvas.width = this.width;
+                                    canvas.height = this.height;
+                                    var ctx = canvas.getContext('2d');
+                                    ctx.drawImage(this, 0, 0);
+                                    var dataURL = canvas.toDataURL('image/jpeg');
+                                    callback(dataURL);
+                                };
+                                img.src = url;
+                            }
+
+                            getBase64Image('<?= base_url('assets/certificate/format_sertifikat.png') ?>', function(dataURL) {
+                                var docDefinition = {
+                                    pageOrientation: 'landscape',
+                                    pageSize: 'A4',
+                                    background: {
+                                        image: dataURL,
+                                        width: 845,
+                                        height: 600,
+                                        absolutePosition: {
+                                            x: 0,
+                                            y: 0
+                                        }
+                                    },
+                                    content: [{
+                                            text: '',
+                                            fontSize: 40,
+                                            bold: true,
+                                            alignment: 'center',
+                                            margin: [85, 85, 85, 85] // Atur margin atas untuk memposisikan teks
+                                        },
+                                        {
+                                            text: '<?= $id_name ?>',
+                                            fontSize: 40,
+                                            bold: true,
+                                            alignment: 'center',
+                                            margin: [30, 30, 30, 30] // Atur margin atas untuk memposisikan teks
+                                        },
+                                        {
+                                            text: '<?= $course->title ?>',
+                                            fontSize: 18,
+                                            alignment: 'center',
+                                            margin: [0, 20, 0, 0] // Atur margin atas untuk memposisikan teks
+                                        },
+                                    ],
+                                };
+
+                                pdfMake.createPdf(docDefinition).download('Sertifikat_<?= $course->title ?>.pdf');
+                            });
+                        });
+                    </script>
                 </div>
             </div>
 

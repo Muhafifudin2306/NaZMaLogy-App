@@ -146,6 +146,7 @@ class Classpath extends CI_Controller
         $data = [
             'id_role' => $this->session->userdata('id_role'),
             'id_user' => $this->session->userdata('id'),
+            'id_name' => $this->session->userdata('name'),
             'id_video' => $this->CourseModel->get_video_by_id($id),
             'feedback' => $this->CourseModel->get_feedback_by_id($id_link, $this->session->userdata('id'))
         ];

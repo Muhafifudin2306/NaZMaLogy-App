@@ -57,23 +57,6 @@ class CourseModel extends CI_Model
 
     // Admin and User Dashboard Index
 
-
-
-
-
-
-
-    // public function get_data_course()
-    // {
-    //     $this->db->select('courses.*, GROUP_CONCAT(categories.name) as category');
-    //     $this->db->from('courses');
-    //     $this->db->join('course_has_category', 'courses.id = course_has_category.id_course');
-    //     $this->db->join('categories', 'course_has_category.id_category = categories.id');
-    //     $this->db->group_by('courses.id');
-    //     $this->db->order_by('created_at', 'desc');
-    //     $query = $this->db->get();
-    //     return $query->result();
-    // }
     public function get_course($id)
     {
         // $query = $this->db->get('courses');
@@ -397,5 +380,26 @@ class CourseModel extends CI_Model
         $this->db->where('id_user', $userID);
         $query = $this->db->get('user_has_course');
         return $query->row();
+    }
+
+    public function get_data_user_has_course()
+    {
+        $this->db->select('user_has_course.*, users.id AS id_user, users.name AS user_name, courses.id AS id_course, courses.title AS course_name, courses.instructor AS instructor_name ');
+        $this->db->join('users', 'user_has_course.id_user = users.id');
+        $this->db->join('courses', 'user_has_course.id_course = courses.id');
+        $this->db->order_by('created_at', 'desc');
+        $this->db->from('user_has_course');
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function get_data_member()
+    {
+        $this->db->select('members.*, users.id AS id_user, users.name AS user_name');
+        $this->db->join('users', 'members.id_user = users.id');
+        $this->db->order_by('created_at', 'desc');
+        $this->db->from('members');
+        $query = $this->db->get();
+        return $query->result();
     }
 }
