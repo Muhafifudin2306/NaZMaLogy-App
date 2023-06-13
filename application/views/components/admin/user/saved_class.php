@@ -43,7 +43,7 @@ if ($this->session->flashdata('success_delete') != '') {
                     $no = 1;
                     foreach ($course as $data) { ?>
                         <?php if ($data->has_relation) : ?>
-                            <div class="col-md-6 col-lg-4">
+                            <div class="col-md-6 col-lg-4 mb-3">
                                 <div class="card-class" data-aos="fade-up" data-aos-duration="700">
                                     <div class="d-flex flex-column rounded border">
                                         <div class="class-image">
