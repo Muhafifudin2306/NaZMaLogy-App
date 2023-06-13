@@ -8,6 +8,8 @@
 
     <title>Berinovasi Wujudkan Mimpi - NaZMaLogy</title>
 
+    <meta name="description" content="Bersama NaZMaLogy Berinovasi Mewujudkan Mimpi. Ubah Impian Menjadi Kenyataan dengan Platform Pembelajaran Interaktif dan Inovatif.">
+
     <!-- Required Style Components -->
     <?php include(APPPATH . 'views/partials/member/style.php'); ?>
 
