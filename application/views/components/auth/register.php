@@ -28,11 +28,6 @@ if ($this->session->flashdata('error') != '') {
                 <h2 class="text-center text-blue-1 py-3 ft-7">Daftar Akun</h2>
                 <!-- Register Form -->
                 <form onsubmit="return validateForm()" method="post" action="<?php echo base_url('auth/register_proccess'); ?>">
-                    <!-- Default to Member Role || Role : 3 -> Member -->
-                    <div class="login__field" hidden>
-                        <input type="text" class="login__input" name="id_role" id="id_role" value="3">
-                    </div>
-                    <!-- Default to Member Role || Role : 3 -> Member -->
                     <div class="login__field">
                         <i class="bx bx-user login__icon"></i>
                         <input type="text" class="login__input" placeholder="Nama Lengkap" name="name" id="name" required>

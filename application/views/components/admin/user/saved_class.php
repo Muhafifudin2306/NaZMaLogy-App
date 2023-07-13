@@ -100,5 +100,6 @@ if ($this->session->flashdata('success_delete') != '') {
                 </div>
             </div>
         </div>
+        <div class="spacer py-5"></div>
     <?php endif ?>
 </div>

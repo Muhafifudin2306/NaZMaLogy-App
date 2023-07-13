@@ -50,13 +50,11 @@ class Profile extends CI_Controller
         //jika gagal upload
         if (!$this->upload->do_upload('image')) {
             $data = array(
-                'name' => $this->input->post('name', TRUE),
                 'summary' => $this->input->post('summary', TRUE),
                 'job' => $this->input->post('job', TRUE),
                 'id_user' => $this->input->post('id_user', TRUE),
                 'instagram' => $this->input->post('instagram', TRUE),
                 'linkedin' => $this->input->post('linkedin', TRUE),
-                'email' => $this->input->post('email', TRUE),
                 'address' => $this->input->post('address', TRUE),
                 'district' => $this->input->post('district', TRUE),
                 'region' => $this->input->post('region', TRUE),
@@ -76,13 +74,11 @@ class Profile extends CI_Controller
         //jika berhasil upload
         else {
             $data = array(
-                'name' => $this->input->post('name', TRUE),
                 'summary' => $this->input->post('summary', TRUE),
                 'job' => $this->input->post('job', TRUE),
                 'id_user' => $this->input->post('id_user', TRUE),
                 'instagram' => $this->input->post('instagram', TRUE),
                 'linkedin' => $this->input->post('linkedin', TRUE),
-                'email' => $this->input->post('email', TRUE),
                 'address' => $this->input->post('address', TRUE),
                 'district' => $this->input->post('district', TRUE),
                 'region' => $this->input->post('region', TRUE),

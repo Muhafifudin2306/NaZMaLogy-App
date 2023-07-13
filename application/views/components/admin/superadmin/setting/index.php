@@ -131,12 +131,12 @@ if ($this->session->flashdata('success_update') != '') {
     </div>
 
 
-    <div class="d-flex justify-content-lg-start">
+    <div class="d-flex justify-content-lg-start" data-aos="fade-up" data-aos-duration="700">
         <h5 class="text-2">Pengaturan Akun</h5>
     </div>
 
     <div class="mb-5 py-3">
-        <div class="bg-white p-5 border mb-5">
+        <div class="bg-white p-5 border mb-5" data-aos="fade-up" data-aos-duration="700" s>
             <table id="example-user" class="table display">
                 <thead>
                     <tr">

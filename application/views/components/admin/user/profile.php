@@ -17,6 +17,24 @@ if ($this->session->flashdata('success_update') != '') {
       })    
       </script>
       ";
+} elseif ($this->session->flashdata('success_add') != '') {
+    echo "
+      <script>
+      Swal.fire({
+          toast: true,
+          position: 'top-right',
+          iconColor: 'white',
+          customClass: {
+              popup: 'colored-toast',
+          },
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          icon: 'success',
+          title: 'Tambah Data Sukses',
+      })    
+      </script>
+      ";
 } else if (form_error('email')) {
     echo "
       <script>
@@ -247,7 +265,7 @@ if ($this->session->flashdata('success_update') != '') {
 
                                         </div>
                                         <div class="mb-2 w-50 p-2">
-                                            <label for="disabledTextInput" class="form-label">Kabupaten</label>
+                                            <label for="disabledTextInput" class="form-label">Kabupaten/Kota</label>
                                             <?php if (empty($member)) : ?>
                                                 <input type="text" class="form-control" value="Belum Terdata" disabled>
                                             <?php else : ?>
@@ -297,8 +315,8 @@ if ($this->session->flashdata('success_update') != '') {
                                                     <input type="text" class="form-control" name="district" placeholder="Kecamatan Saya" required>
                                                 </div>
                                                 <div class="mb-2 w-50 p-2">
-                                                    <label for="TextInput" class="form-label">Kabupaten</label>
-                                                    <input type="text" class="form-control" name="region" placeholder="Kabupaten Saya" required>
+                                                    <label for="TextInput" class="form-label">Kabupaten/Kota</label>
+                                                    <input type="text" class="form-control" name="region" placeholder="Kabupaten/Kota Saya" required>
                                                 </div>
                                                 <div class="mb-2 w-50 p-2">
                                                     <label for="TextInput" class="form-label">Provinsi</label>
@@ -336,8 +354,8 @@ if ($this->session->flashdata('success_update') != '') {
                                                     <input type="text" class="form-control" name="district" value="<?= $member->district ?>" placeholder="Kecamatan Saya">
                                                 </div>
                                                 <div class="mb-2 w-50 p-2">
-                                                    <label for="TextInput" class="form-label">Kabupaten</label>
-                                                    <input type="text" class="form-control" name="region" value="<?= $member->region ?>" placeholder="Kabupaten Saya">
+                                                    <label for="TextInput" class="form-label">Kabupaten/Kota</label>
+                                                    <input type="text" class="form-control" name="region" value="<?= $member->region ?>" placeholder="Kabupaten/Kota Saya">
                                                 </div>
                                                 <div class="mb-2 w-50 p-2">
                                                     <label for="TextInput" class="form-label">Provinsi</label>

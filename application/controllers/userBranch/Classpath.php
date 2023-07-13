@@ -18,6 +18,9 @@ class Classpath extends CI_Controller
         if (empty($this->session->userdata('is_login'))) {
             $this->session->set_flashdata('end_session', 'User Belum Login');
             redirect('auth/login_page');
+        } elseif ($this->session->userdata('id_role') == 1) {
+            $this->session->set_flashdata('end_session', 'Akses Diblokir');
+            redirect($_SERVER['HTTP_REFERER']);
         }
     }
 

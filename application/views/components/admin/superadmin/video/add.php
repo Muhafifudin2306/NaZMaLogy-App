@@ -48,7 +48,7 @@
                             <?= form_error('id_playlist'); ?>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-blue-1">Edit Data</button>
+                    <button type="submit" class="btn btn-primary btn-blue-1">Tambah Data</button>
                 </form>
             </div>
         </div>

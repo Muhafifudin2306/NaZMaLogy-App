@@ -77,7 +77,6 @@ if ($this->session->flashdata('success_add') != '') {
             </thead>
 
             <tbody>
-
                 <?php
                 $no = 1;
                 foreach ($user_has_course as $data) { ?>
@@ -86,13 +85,23 @@ if ($this->session->flashdata('success_add') != '') {
                         <td><?= $data->course_name ?></td>
                         <td><?= $data->instructor_name ?></td>
                         <td><?= $data->user_name ?></td>
-                        <td class="text-center fw-bold text-blue-1 fs-7"><?= round($data->progress) . '%' ?></td>
-                        <td class="text-center text-orange-2 fs-7 fw-bold"><i class="bi bi-star-fill"></i> <?= round($data->rating) ?></td>
-                        <td width="25%"><?= $data->feedback ?></td>
+                        <?php if ($data->progress == NULL) : ?>
+                            <td class="text-center fw-bold text-blue-1 fs-7"> 0% </td>
+                        <?php else : ?>
+                            <td class="text-center fw-bold text-blue-1 fs-7"><?= round($data->progress) . '%' ?></td>
+                        <?php endif ?>
+                        <?php if ($data->rating == NULL) : ?>
+                            <td class="text-center text-orange-2 fs-7 fw-bold"><i class="bi bi-star-fill"></i> 0 </td>
+                        <?php else : ?>
+                            <td class="text-center text-orange-2 fs-7 fw-bold"><i class="bi bi-star-fill"></i> <?= round($data->rating) ?></td>
+                        <?php endif ?>
+                        <?php if ($data->feedback == NULL) : ?>
+                            <td class="text-center fs-7" width="25%">Belum ada feedback</td>
+                        <?php else : ?>
+                            <td width="25%"><?= $data->feedback ?></td>
+                        <?php endif ?>
                     </tr>
                 <?php } ?>
-
-
             </tbody>
         </table>
     </div>
@@ -162,7 +171,7 @@ if ($this->session->flashdata('success_add') != '') {
                                 $category = explode(',', $data->category);
                                 foreach ($category as $kat) {
                                     echo "
-                                    <button class='btn btn-warning'>" . $kat . "</button>" . '<br>';
+                                    <button class='btn btn-warning fs-8 fw-bold'>" . $kat . "</button>" . '<br>';
                                 }
                                 ?>
                             </div>

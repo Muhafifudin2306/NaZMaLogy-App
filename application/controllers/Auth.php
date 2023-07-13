@@ -41,11 +41,6 @@ class Auth extends CI_Controller
                         'label' => 'name',
                         'rules' => 'trim|required|min_length[3]|max_length[255]'
                   ],
-                  [
-                        'field' => 'id_role',
-                        'label' => 'id_role',
-                        'rules' => 'trim|required|min_length[1]|max_length[255]'
-                  ]
             ];
 
             $this->form_validation->set_rules($rules);
@@ -55,11 +50,11 @@ class Auth extends CI_Controller
                         'email' => $this->input->post('email'),
                         'password' => password_hash($this->input->post('password'), PASSWORD_BCRYPT),
                         'name' => $this->input->post('name'),
-                        'id_role' => $this->input->post('id_role')
+                        'id_role' => 3
                   ];
 
                   $this->db->insert('users', $data);
-                  $this->session->set_flashdata('success_register', 'Proses Pendaftaran User Berhasil');
+                  $this->session->set_flashdata('success_register', 'Register Berhasil');
                   redirect('auth/login_page');
             } else {
                   $this->session->set_flashdata('error', 'Email Sudah Terdaftar!');
